@@ -68,21 +68,23 @@ class MonthlySummaryCard extends StatelessWidget {
               children: [
                 _StatCell(
                   icon: Icons.timer_outlined,
-                  iconColor: const Color(0xFF1976D2),
+                  iconColor: AppTheme.monthlyStatTotalColor(theme.brightness),
                   label: l10n.monthlyTotal,
                   value: _durationValue(stats.totalSeconds, l10n),
                   theme: theme,
                 ),
                 _StatCell(
                   icon: Icons.trending_up,
-                  iconColor: const Color(0xFF7B1FA2),
+                  iconColor: AppTheme.monthlyStatAverageColor(theme.brightness),
                   label: l10n.monthlyAvgPerDay,
                   value: _durationValue(stats.avgSecondsPerDay, l10n),
                   theme: theme,
                 ),
                 _StatCell(
                   icon: Icons.calendar_today_outlined,
-                  iconColor: const Color(0xFF388E3C),
+                  iconColor: AppTheme.monthlyStatActiveDaysColor(
+                    theme.brightness,
+                  ),
                   label: l10n.monthlyActiveDays,
                   value: _daysValue(stats.activeDays, l10n),
                   theme: theme,

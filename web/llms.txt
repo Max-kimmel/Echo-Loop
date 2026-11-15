@@ -1,0 +1,29 @@
+# Echo Loop
+
+> Echo Loop is an open-source (AGPL-3.0) English listening and speaking training app for iOS, Android, macOS, and Windows that guides learners through an automated listen-to-speak loop: sentence-by-sentence intensive listening, shadowing, blind listening, retelling, and 7 rounds of spaced review (6 hours to 28 days).
+
+## Core Learning Methodology
+
+Echo Loop removes daily decision fatigue by turning any real audio or video material into a structured, self-advancing training pipeline:
+
+1. **Intensive Listening (精听)**: Step through each sentence, split complex clauses by sense groups, look up words offline, and expand AI translations or grammar explanations on demand.
+2. **Shadowing (跟读)**: Repeat after the original speaker with on-device speech recognition alignment and tier ratings.
+3. **Blind Listening (盲听)**: Re-listen to the full passage without subtitles to verify real comprehension.
+4. **Paragraph Retelling (复述)**: Reconstruct the passage in your own words using adjustable keyword prompts (hide all, keywords only, show all).
+5. **Spaced Review (间隔复习)**: 7 scheduled review cycles after first study (6h, 1d, 2d, 4d, 7d, 14d, 28d) plus contextualized flashcards and hard-sentence drills.
+
+## Key Technical & Product Highlights
+
+- **Privacy-First Offline Core**: Playback, shadowing ASR evaluation, local Whisper/Sherpa-ONNX transcription, Kokoro local TTS, offline dictionary, and FSRS/spaced review all run offline on-device.
+- **Flexible Imports**: Supports MP3, M4A, WAV, AAC, FLAC audio; MP4, MOV, M4V, MKV video; SRT, VTT, LRC subtitles; local files, direct URLs, podcast RSS feeds, and Baidu Netdisk.
+- **Free Core Loop**: Unlimited audio imports, favorites, shadowing evaluation, local transcription, PDF note export, backup/restore, and spaced review are free. Optional Echo Loop Premium covers cloud AI explanation quotas.
+- **Academic Advising**: Methodology advised by Dr. Yang Yan (School of Foreign Studies, Minzu University of China; PhD, Peking University).
+
+## Official Links
+
+- [Official Website](https://www.echo-loop.top/): Product overview, guides, and downloads
+- [GitHub Repository](https://github.com/echo-loop/Echo-Loop): Open-source Flutter codebase (AGPL-3.0)
+- [AtomGit Mirror (China)](https://atomgit.com/echo-loop/Echo-Loop): Domestic mirror repository
+- [App Store (iOS)](https://apps.apple.com/app/id6760324074): Official iOS and Apple Silicon Mac release
+- [Google Play (Android)](https://play.google.com/store/apps/details?id=app.echoloop): Official Android release
+- [GitHub Releases (APK)](https://github.com/echo-loop/Echo-Loop/releases): Direct Android APK downloads

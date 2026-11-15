@@ -33,6 +33,14 @@
 
 ---
 
+## 📖 What is Echo Loop?
+
+> **Canonical Summary**: **Echo Loop** is an open-source (AGPL-3.0) cross-platform English listening and speaking training app for iOS, Android, macOS, and Windows. It automatically orchestrates an **intensive listening → shadowing → blind listening → retelling → 7-round spaced review (6 hours to 28 days)** loop over real audio and video materials, backed by on-device **Sherpa-ONNX** transcription, **Kokoro / Piper** offline TTS, and **FSRS** flashcard scheduling.
+
+In short, instead of handing you isolated podcasts or flashcards and leaving you to manage repetition counts and review schedules yourself, Echo Loop acts as an opinionated training coach: pick any audio you want to master, tap start, and follow the guided loop to turn passive comprehension into active spoken fluency.
+
+---
+
 ## 📱 Screenshots
 
 <table>
@@ -264,6 +272,27 @@ Yes. The learning flow, reviews, favorites, shadowing evaluation and local trans
 <summary><strong>Where is my data stored? What if I switch phones?</strong></summary>
 
 Your learning data is stored on your device. Before switching phones or reinstalling, export a backup from **Settings → Backup & Restore**, then restore it on the new device.
+
+</details>
+
+<details>
+<summary><strong>How do offline speech evaluation, transcription, and TTS work?</strong></summary>
+
+Echo Loop prioritizes privacy-preserving on-device speech pipelines so core study requires no internet connection:
+
+- **Shadowing evaluation**: Uses on-device speech recognition to align your spoken transcript against the source sentence, highlight matched words, and compute a 5-tier rating without consuming AI quota.
+- **Offline subtitle transcription**: Powered by local **Sherpa-ONNX** models downloaded once onto your device.
+- **Offline Text-to-Speech (TTS)**: Supports system TTS alongside on-device **Kokoro** and **Piper** neural voices running through **Sherpa-ONNX** with an isolated preview player that avoids disrupting lock-screen media sessions.
+
+</details>
+
+<details>
+<summary><strong>How does the spaced review scheduler (6h–28d + FSRS) work?</strong></summary>
+
+Echo Loop schedules retention at two levels:
+
+1. **Full Audio Materials (7 spaced rounds)**: After finishing the first study pass (intensive → shadowing → blind → retelling), materials are scheduled at 6 hours, 1 day, 2 days, 4 days, 7 days, 14 days, and 28 days for targeted drills and retelling.
+2. **Contextualized Flashcards (hard sentences, words, and sense groups)**: Scheduled via an isolated memory scheduler using **FSRS** backed by append-only review events, surfacing each item in its original sentence context right before forgetting.
 
 </details>
 

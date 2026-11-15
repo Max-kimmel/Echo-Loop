@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
 import '../../providers/monthly_study_records_provider.dart';
 import '../../theme/app_theme.dart';
+import '../../theme/learning_progress_colors.dart';
 
 /// 活动日历的自定义日期单元格
 ///
@@ -40,38 +41,6 @@ class ActivityDayCell extends StatelessWidget {
   /// 12 档分钟阈值（递增），超过最后一档按最深色处理
   static const _thresholds = [5, 10, 20, 35, 55, 80, 110, 145, 185, 230, 280];
 
-  /// 12 级绿色（亮色主题），从极浅到极深
-  static const _lightColors = [
-    Color(0xFFE8F5E9), // level 1  ≤5min
-    Color(0xFFD7F5DD), // level 2  ≤10min
-    Color(0xFFC0EDCA), // level 3  ≤20min
-    Color(0xFF9BE9A8), // level 4  ≤35min
-    Color(0xFF6DDC80), // level 5  ≤55min
-    Color(0xFF4FCC6A), // level 6  ≤80min
-    Color(0xFF40C463), // level 7  ≤110min
-    Color(0xFF30A14E), // level 8  ≤145min
-    Color(0xFF278C41), // level 9  ≤185min
-    Color(0xFF216E39), // level 10 ≤230min
-    Color(0xFF1A5E30), // level 11 ≤280min
-    Color(0xFF155C2B), // level 12 >280min
-  ];
-
-  /// 12 级绿色（暗色主题）
-  static const _darkColors = [
-    Color(0xFF071E0B), // level 1
-    Color(0xFF0A3018), // level 2
-    Color(0xFF0C3A1E), // level 3
-    Color(0xFF0E4429), // level 4
-    Color(0xFF065525), // level 5
-    Color(0xFF006D32), // level 6
-    Color(0xFF0E8A3E), // level 7
-    Color(0xFF26A641), // level 8
-    Color(0xFF2DBF4E), // level 9
-    Color(0xFF39D353), // level 10
-    Color(0xFF48DA62), // level 11
-    Color(0xFF56E067), // level 12
-  ];
-
   /// 按固定阈值将学习时长（秒）映射到 1–12 档
   ///
   /// 阈值（分钟）：5–10–20–35–55–80–110–145–185–230–280
@@ -86,12 +55,8 @@ class ActivityDayCell extends StatelessWidget {
   }
 
   /// 根据学习时长返回圆形背景色
-  static Color intensityColor(int seconds, Brightness brightness) {
-    final level = _toLevel(seconds);
-    if (level == 0) return Colors.transparent;
-    final colors = brightness == Brightness.dark ? _darkColors : _lightColors;
-    return colors[level - 1];
-  }
+  static Color intensityColor(int seconds, Brightness brightness) =>
+      ActivityHeatmapColors.colorForLevel(_toLevel(seconds), brightness);
 
   /// level >= 7 时背景较深，文字需要用白色保证可读性
   static bool _needsLightText(int seconds) => _toLevel(seconds) >= 7;
@@ -132,6 +97,7 @@ class ActivityDayCell extends StatelessWidget {
 
     return Semantics(
       label: semanticLabel,
+      selected: isSelected,
       child: Center(
         child: SizedBox(
           width: 36,
@@ -145,9 +111,15 @@ class ActivityDayCell extends StatelessWidget {
                   color: bgColor,
                   shape: BoxShape.circle,
                   border: isToday
-                      ? Border.all(color: Colors.red, width: 1.5)
+                      ? Border.all(
+                          color: ActivityHeatmapColors.todayBorderColor,
+                          width: 1.5,
+                        )
                       : isSelected
-                      ? Border.all(color: Colors.orange, width: 1.5)
+                      ? Border.all(
+                          color: ActivityHeatmapColors.selectedBorderColor,
+                          width: 1.5,
+                        )
                       : null,
                 ),
                 alignment: Alignment.center,

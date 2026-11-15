@@ -670,27 +670,10 @@ class _WarmUpCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-
-    // 暖橙调配色（亮/暗双套），不读 colorScheme 以避免主题 tertiary 偏色。
-    const amber = Color(0xFFFFB300);
-    final bg = isDark
-        ? Color.alphaBlend(
-            amber.withValues(alpha: 0.12),
-            theme.colorScheme.surface,
-          )
-        : const Color(0xFFFFF4E2);
-    final border = isDark
-        ? amber.withValues(alpha: 0.20)
-        : const Color(0xFFF4D7A8).withValues(alpha: 0.6);
-    final iconBg = amber.withValues(alpha: isDark ? 0.22 : 0.16);
-    final iconFg = isDark ? const Color(0xFFFFB74D) : const Color(0xFFE8870C);
-    final titleColor = isDark
-        ? const Color(0xFFFFE2B8)
-        : const Color(0xFF5A3A12);
-    final descColor = titleColor.withValues(alpha: isDark ? 0.70 : 0.72);
-    final badgeBg = isDark ? amber : const Color(0xFFF38B00);
-    final badgeFg = isDark ? const Color(0xFF3A2400) : Colors.white;
+    final palette = AppTheme.warmUpCardPalette(
+      theme.brightness,
+      theme.colorScheme,
+    );
 
     return Semantics(
       button: true,
@@ -704,9 +687,9 @@ class _WarmUpCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           child: Ink(
             decoration: BoxDecoration(
-              color: bg,
+              color: palette.backgroundColor,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: border, width: 1),
+              border: Border.all(color: palette.borderColor, width: 1),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(
@@ -719,13 +702,13 @@ class _WarmUpCard extends StatelessWidget {
                     width: 36,
                     height: 36,
                     decoration: BoxDecoration(
-                      color: iconBg,
+                      color: palette.iconBackgroundColor,
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
                       Icons.headphones_rounded,
                       size: 20,
-                      color: iconFg,
+                      color: palette.iconForegroundColor,
                     ),
                   ),
                   const SizedBox(width: AppSpacing.s + 4),
@@ -744,7 +727,7 @@ class _WarmUpCard extends StatelessWidget {
                                 maxLines: 2,
                                 style: theme.textTheme.titleSmall?.copyWith(
                                   fontWeight: FontWeight.w600,
-                                  color: titleColor,
+                                  color: palette.titleColor,
                                 ),
                               ),
                             ),
@@ -755,13 +738,13 @@ class _WarmUpCard extends StatelessWidget {
                                 vertical: 1,
                               ),
                               decoration: BoxDecoration(
-                                color: badgeBg,
+                                color: palette.badgeBackgroundColor,
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Text(
                                 l10n.warmUpCardBadge,
                                 style: theme.textTheme.labelSmall?.copyWith(
-                                  color: badgeFg,
+                                  color: palette.badgeForegroundColor,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -779,7 +762,7 @@ class _WarmUpCard extends StatelessWidget {
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: theme.textTheme.bodySmall?.copyWith(
-                                  color: descColor,
+                                  color: palette.subtitleColor,
                                 ),
                               ),
                             ),
@@ -788,7 +771,7 @@ class _WarmUpCard extends StatelessWidget {
                               child: Icon(
                                 Icons.chevron_right_rounded,
                                 size: 22,
-                                color: iconFg.withValues(alpha: 0.7),
+                                color: palette.chevronColor,
                               ),
                             ),
                           ],

@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../features/review_statistics/review_statistics_provider.dart';
 import '../features/review_statistics/review_statistics_repository.dart';
 import '../l10n/app_localizations.dart';
+import '../theme/app_theme.dart';
 import '../widgets/common/app_segmented_button.dart';
 import '../widgets/stat_value_text.dart';
 
@@ -238,7 +239,7 @@ class _TodayOverview extends StatelessWidget {
         _MetricCard(
           value: _durationValue(stats.todaySeconds, l10n),
           label: l10n.reviewStatisticsDuration,
-          accent: const Color(0xFF4D9271),
+          accent: AppTheme.reviewGoodColor,
         ),
       ];
       if (constraints.maxWidth < 360) {
@@ -370,7 +371,7 @@ class _StreakCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    const accent = Color(0xFFD88A36);
+    const accent = AppTheme.reviewMasteryColor;
     return _Surface(
       padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 15),
       child: Row(
@@ -662,7 +663,7 @@ class _UpcomingChart extends StatelessWidget {
                             ).format(now.add(Duration(days: index))),
                       style: theme.textTheme.labelSmall?.copyWith(
                         color: index == 0
-                            ? const Color(0xFFC56B45)
+                            ? AppTheme.reviewAgainColor
                             : theme.colorScheme.onSurfaceVariant,
                         fontWeight: index == 0 ? FontWeight.w800 : null,
                       ),
@@ -693,8 +694,8 @@ class _UpcomingChart extends StatelessWidget {
                     toY: stats.upcomingDue[i].toDouble(),
                     width: 18,
                     color: i == 0
-                        ? const Color(0xFFC56B45)
-                        : const Color(0xFF597C65),
+                        ? AppTheme.reviewAgainColor
+                        : AppTheme.reviewUpcomingColor,
                     borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(7),
                     ),
@@ -703,8 +704,8 @@ class _UpcomingChart extends StatelessWidget {
                       text: stats.upcomingDue[i].toString(),
                       style: theme.textTheme.labelSmall?.copyWith(
                         color: i == 0
-                            ? const Color(0xFFC56B45)
-                            : const Color(0xFF597C65),
+                            ? AppTheme.reviewAgainColor
+                            : AppTheme.reviewUpcomingColor,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
@@ -738,12 +739,12 @@ class _RatingChart extends StatelessWidget {
       _RatingSlice(
         l10n.bookmarkReviewRatingAgain,
         stats.ratings.again + stats.ratings.hard,
-        const Color(0xFFC56B45),
+        AppTheme.reviewAgainColor,
       ),
       _RatingSlice(
         l10n.bookmarkReviewRatingGood,
         stats.ratings.good,
-        const Color(0xFF4D9271),
+        AppTheme.reviewGoodColor,
       ),
       _RatingSlice(
         l10n.bookmarkReviewRatingEasy,
@@ -905,7 +906,7 @@ class _ContentSummary extends StatelessWidget {
         _ContentTile(
           label: l10n.reviewStatisticsVocabulary,
           count: stats.totalVocabulary,
-          color: const Color(0xFF4D9271),
+          color: AppTheme.reviewGoodColor,
         ),
       ],
       ReviewStatisticsScope.sentences => [
@@ -919,7 +920,7 @@ class _ContentSummary extends StatelessWidget {
         _ContentTile(
           label: l10n.reviewStatisticsVocabulary,
           count: stats.totalVocabulary,
-          color: const Color(0xFF4D9271),
+          color: AppTheme.reviewGoodColor,
         ),
       ],
     };

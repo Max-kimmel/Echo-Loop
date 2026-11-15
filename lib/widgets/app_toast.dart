@@ -60,50 +60,58 @@ void showAppToast({
       // toastification 把每条 toast 放进固定宽度（默认 400）的槽位，内容默认靠左，
       // 因此这里显式居中；点击区域只覆盖胶囊本身。
       return Center(
-        child: GestureDetector(
-          onTap: dismissOnTap
-              ? () => toastification.dismissById(holder.id)
-              : null,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: maxWidth < _maxToastWidth ? maxWidth : _maxToastWidth,
-            ),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: BoxDecoration(
-                color: backgroundColor,
-                // 单行时接近胶囊；换行后仍是圆角矩形，不会变成大圆角的团块。
-                borderRadius: BorderRadius.circular(24),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color(0x1F000000),
-                    blurRadius: 12,
-                    offset: Offset(0, 4),
-                  ),
-                ],
+        child: Semantics(
+          liveRegion: true,
+          button: dismissOnTap,
+          label: message,
+          child: GestureDetector(
+            onTap: dismissOnTap
+                ? () => toastification.dismissById(holder.id)
+                : null,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: maxWidth < _maxToastWidth ? maxWidth : _maxToastWidth,
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  if (icon != null) ...[
-                    Icon(icon, size: 20, color: foregroundColor),
-                    const SizedBox(width: 8),
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                decoration: BoxDecoration(
+                  color: backgroundColor,
+                  // 单行时接近胶囊；换行后仍是圆角矩形，不会变成大圆角的团块。
+                  borderRadius: BorderRadius.circular(24),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color(0x1F000000),
+                      blurRadius: 12,
+                      offset: Offset(0, 4),
+                    ),
                   ],
-                  Flexible(
-                    child: Text(
-                      message,
-                      // 左对齐：换行时图标与文字首行贴近，而不是文字居中后图标离得很远。
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: foregroundColor,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    if (icon != null) ...[
+                      Icon(icon, size: 20, color: foregroundColor),
+                      const SizedBox(width: 8),
+                    ],
+                    Flexible(
+                      child: Text(
+                        message,
+                        // 左对齐：换行时图标与文字首行贴近，而不是文字居中后图标离得很远。
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: foregroundColor,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

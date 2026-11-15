@@ -13,6 +13,7 @@ import '../../models/rating_thresholds.dart';
 import '../../models/speech_practice_models.dart';
 import '../../services/app_logger.dart';
 import '../../services/audio_preview_controller.dart';
+import '../../theme/app_theme.dart';
 import 'tappable_wrapper.dart';
 
 // 重导出 RatingThresholds，保持现有 import 兼容
@@ -187,36 +188,41 @@ class _SpeechRatingBadgeState extends State<SpeechRatingBadge> {
     }
 
     final style = _ratingStyle(theme);
+    final ratingLabel = _ratingLabel();
 
-    return TappableWrapper(
-      onTap: attempt.hasRecording ? _handleTap : null,
-      feedbackType: TapFeedback.opacity,
-      pressedOpacity: 0.6,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [style.backgroundStart, style.backgroundEnd],
-          ),
-          borderRadius: BorderRadius.circular(999),
-          border: Border.all(color: style.borderColor),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              _ratingLabel(),
-              style: theme.textTheme.labelMedium?.copyWith(
-                color: style.textColor,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 0.2,
-              ),
+    return Semantics(
+      button: attempt.hasRecording,
+      label: ratingLabel,
+      child: TappableWrapper(
+        onTap: attempt.hasRecording ? _handleTap : null,
+        feedbackType: TapFeedback.opacity,
+        pressedOpacity: 0.6,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [style.backgroundStart, style.backgroundEnd],
             ),
-            if (attempt.hasRecording) ...[
-              const SizedBox(width: 6),
-              _buildPlaybackIcon(style.textColor.withValues(alpha: 0.7)),
+            borderRadius: BorderRadius.circular(999),
+            border: Border.all(color: style.borderColor),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                ratingLabel,
+                style: theme.textTheme.labelMedium?.copyWith(
+                  color: style.textColor,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 0.2,
+                ),
+              ),
+              if (attempt.hasRecording) ...[
+                const SizedBox(width: 6),
+                _buildPlaybackIcon(style.textColor.withValues(alpha: 0.7)),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );
@@ -300,50 +306,56 @@ class _SpeechRatingBadgeState extends State<SpeechRatingBadge> {
         ? theme.colorScheme.outline.withValues(alpha: 0.3)
         : theme.colorScheme.outline.withValues(alpha: 0.2);
 
-    return TappableWrapper(
-      onTap: _handleTap,
-      feedbackType: TapFeedback.opacity,
-      pressedOpacity: 0.6,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-        decoration: BoxDecoration(
-          color: bgColor,
-          borderRadius: BorderRadius.circular(999),
-          border: Border.all(color: borderColor),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              widget.l10n.listenAndRepeatRecordingOnly,
-              style: theme.textTheme.labelMedium?.copyWith(
-                color: textColor,
-                fontWeight: FontWeight.w600,
+    return Semantics(
+      button: true,
+      label: widget.l10n.listenAndRepeatRecordingOnly,
+      child: TappableWrapper(
+        onTap: _handleTap,
+        feedbackType: TapFeedback.opacity,
+        pressedOpacity: 0.6,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          decoration: BoxDecoration(
+            color: bgColor,
+            borderRadius: BorderRadius.circular(999),
+            border: Border.all(color: borderColor),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                widget.l10n.listenAndRepeatRecordingOnly,
+                style: theme.textTheme.labelMedium?.copyWith(
+                  color: textColor,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            const SizedBox(width: 6),
-            _buildPlaybackIcon(textColor.withValues(alpha: 0.7)),
-          ],
+              const SizedBox(width: 6),
+              _buildPlaybackIcon(textColor.withValues(alpha: 0.7)),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  String _ratingLabel() {
+  SpeechRatingTier _ratingTier() {
     final score = widget.attempt.score ?? 0;
-    if (score >= widget.thresholds.perfect) {
-      return widget.l10n.listenAndRepeatRatingPerfect;
-    }
-    if (score >= widget.thresholds.excellent) {
-      return widget.l10n.listenAndRepeatRatingExcellent;
-    }
-    if (score >= widget.thresholds.good) {
-      return widget.l10n.listenAndRepeatRatingGood;
-    }
-    if (score >= widget.thresholds.fair) {
-      return widget.l10n.listenAndRepeatRatingFair;
-    }
-    return widget.l10n.listenAndRepeatRatingKeepGoing;
+    if (score >= widget.thresholds.perfect) return SpeechRatingTier.perfect;
+    if (score >= widget.thresholds.excellent) return SpeechRatingTier.excellent;
+    if (score >= widget.thresholds.good) return SpeechRatingTier.good;
+    if (score >= widget.thresholds.fair) return SpeechRatingTier.fair;
+    return SpeechRatingTier.keepGoing;
+  }
+
+  String _ratingLabel() {
+    return switch (_ratingTier()) {
+      SpeechRatingTier.perfect => widget.l10n.listenAndRepeatRatingPerfect,
+      SpeechRatingTier.excellent => widget.l10n.listenAndRepeatRatingExcellent,
+      SpeechRatingTier.good => widget.l10n.listenAndRepeatRatingGood,
+      SpeechRatingTier.fair => widget.l10n.listenAndRepeatRatingFair,
+      SpeechRatingTier.keepGoing => widget.l10n.listenAndRepeatRatingKeepGoing,
+    };
   }
 
   String _feedbackText() {
@@ -366,7 +378,7 @@ class _SpeechRatingBadgeState extends State<SpeechRatingBadge> {
 
   Color _statusColor(ThemeData theme) {
     return switch (widget.attempt.status) {
-      SpeechPracticeAttemptStatus.passed => const Color(0xFF2E9B51),
+      SpeechPracticeAttemptStatus.passed => AppTheme.speechPassedColor,
       SpeechPracticeAttemptStatus.awaitingFinal => theme.colorScheme.primary,
       SpeechPracticeAttemptStatus.belowThreshold ||
       SpeechPracticeAttemptStatus.noEnglishDetected ||
@@ -377,97 +389,6 @@ class _SpeechRatingBadgeState extends State<SpeechRatingBadge> {
     };
   }
 
-  _RatingBadgeStyle _ratingStyle(ThemeData theme) {
-    final isDark = theme.brightness == Brightness.dark;
-    final score = widget.attempt.score ?? 0;
-
-    if (score >= widget.thresholds.perfect) {
-      return isDark
-          ? const _RatingBadgeStyle(
-              textColor: Color(0xFFFFE082),
-              backgroundStart: Color(0x33C9A030),
-              backgroundEnd: Color(0x1A7A5F14),
-              borderColor: Color(0x40E0B84A),
-            )
-          : const _RatingBadgeStyle(
-              textColor: Color(0xFF8B6914),
-              backgroundStart: Color(0xFFFFF8E1),
-              backgroundEnd: Color(0xFFFFF0B8),
-              borderColor: Color(0xFFE0C068),
-            );
-    }
-    if (score >= widget.thresholds.excellent) {
-      return isDark
-          ? const _RatingBadgeStyle(
-              textColor: Color(0xFFB9F5C8),
-              backgroundStart: Color(0x3347B66B),
-              backgroundEnd: Color(0x1A245B38),
-              borderColor: Color(0x4057C878),
-            )
-          : const _RatingBadgeStyle(
-              textColor: Color(0xFF1E7A3D),
-              backgroundStart: Color(0xFFEAF8EF),
-              backgroundEnd: Color(0xFFDDF2E4),
-              borderColor: Color(0xFFA8D6B6),
-            );
-    }
-    if (score >= widget.thresholds.good) {
-      return isDark
-          ? const _RatingBadgeStyle(
-              textColor: Color(0xFFE4F3B2),
-              backgroundStart: Color(0x33A4B84B),
-              backgroundEnd: Color(0x1A56611F),
-              borderColor: Color(0x40BDD460),
-            )
-          : const _RatingBadgeStyle(
-              textColor: Color(0xFF687A18),
-              backgroundStart: Color(0xFFF6F8DF),
-              backgroundEnd: Color(0xFFEEF3C8),
-              borderColor: Color(0xFFD6DD9A),
-            );
-    }
-    if (score >= widget.thresholds.fair) {
-      return isDark
-          ? const _RatingBadgeStyle(
-              textColor: Color(0xFFF7D79B),
-              backgroundStart: Color(0x33C68A38),
-              backgroundEnd: Color(0x1A6D4617),
-              borderColor: Color(0x40E0A450),
-            )
-          : const _RatingBadgeStyle(
-              textColor: Color(0xFF8A5A14),
-              backgroundStart: Color(0xFFFFF1DD),
-              backgroundEnd: Color(0xFFF9E3BF),
-              borderColor: Color(0xFFE6C48C),
-            );
-    }
-    return isDark
-        ? const _RatingBadgeStyle(
-            textColor: Color(0xFFB0BEC5),
-            backgroundStart: Color(0x33607D8B),
-            backgroundEnd: Color(0x1A37474F),
-            borderColor: Color(0x4078909C),
-          )
-        : const _RatingBadgeStyle(
-            textColor: Color(0xFF546E7A),
-            backgroundStart: Color(0xFFECEFF1),
-            backgroundEnd: Color(0xFFE0E4E8),
-            borderColor: Color(0xFFB0BEC5),
-          );
-  }
-}
-
-/// 评级 Badge 内部样式
-class _RatingBadgeStyle {
-  final Color textColor;
-  final Color backgroundStart;
-  final Color backgroundEnd;
-  final Color borderColor;
-
-  const _RatingBadgeStyle({
-    required this.textColor,
-    required this.backgroundStart,
-    required this.backgroundEnd,
-    required this.borderColor,
-  });
+  SpeechRatingBadgeStyle _ratingStyle(ThemeData theme) =>
+      AppTheme.speechRatingBadgeStyle(_ratingTier(), theme.brightness);
 }

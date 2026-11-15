@@ -1035,10 +1035,10 @@ class _SpecialOfferStrip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final backgroundColor = theme.brightness == Brightness.dark
-        ? const Color(0xFFD8B11E)
-        : const Color(0xFFFCE76B);
-    final textColor = const Color(0xFF111111);
+    final backgroundColor = AppTheme.premiumUpgradeBadgeBackground(
+      theme.brightness,
+    );
+    const textColor = AppTheme.onPremiumUpgradeBadge;
     return Container(
       key: const ValueKey('paywall_special_offer'),
       width: double.infinity,
@@ -1424,10 +1424,10 @@ class _RecommendedBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final backgroundColor = theme.brightness == Brightness.dark
-        ? const Color(0xFFD8B11E)
-        : const Color(0xFFFCE76B);
-    final textColor = const Color(0xFF111111);
+    final backgroundColor = AppTheme.premiumUpgradeBadgeBackground(
+      theme.brightness,
+    );
+    const textColor = AppTheme.onPremiumUpgradeBadge;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(

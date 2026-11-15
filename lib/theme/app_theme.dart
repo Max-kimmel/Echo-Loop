@@ -158,6 +158,70 @@ class AppTheme {
   /// 语义色：Podcast 合集角标（深紫，配白字）。
   static const Color podcastCollectionBadgeColor = Color(0xFF6A1B9A);
 
+  /// 语义色：复习统计与完成总结（「再来一遍 / 今日到期」陶土橙红）。
+  static const Color reviewAgainColor = Color(0xFFC56B45);
+
+  /// 语义色：复习统计与完成总结（「听懂了 / 时长 / 词汇」鼠尾草绿）。
+  static const Color reviewGoodColor = Color(0xFF4D9271);
+
+  /// 语义色：复习统计（未来到期柱体灰绿）。
+  static const Color reviewUpcomingColor = Color(0xFF597C65);
+
+  /// 语义色：复习统计与完成总结（「轻松听懂 / 记忆保留率」岩蓝）。
+  static const Color reviewEasyColor = Color(0xFF2B6C8F);
+
+  /// 语义色：复习统计（连续复习 / 掌握度琥珀金）。
+  static const Color reviewMasteryColor = Color(0xFFD88A36);
+
+  /// 语义色：跟读通过状态文字（清新绿）。
+  static const Color speechPassedColor = Color(0xFF2E9B51);
+
+  /// 月度统计「总计学习时长」图标与数字色（深色主题提亮以保证 OLED 表面对比度）。
+  static Color monthlyStatTotalColor(Brightness brightness) =>
+      brightness == Brightness.dark
+      ? const Color(0xFF64B5F6)
+      : const Color(0xFF1976D2);
+
+  /// 月度统计「日均学习时长」图标与数字色（深色主题提亮以保证 OLED 表面对比度）。
+  static Color monthlyStatAverageColor(Brightness brightness) =>
+      brightness == Brightness.dark
+      ? const Color(0xFFCE93D8)
+      : const Color(0xFF7B1FA2);
+
+  /// 月度统计「活跃学习天数」图标与数字色（深色主题提亮以保证 OLED 表面对比度）。
+  static Color monthlyStatActiveDaysColor(Brightness brightness) =>
+      brightness == Brightness.dark
+      ? const Color(0xFF81C784)
+      : const Color(0xFF388E3C);
+
+  /// 获取每日目标达成提示胶囊调色板。
+  static DailyGoalToastPalette dailyGoalToastPalette(Brightness brightness) =>
+      brightness == Brightness.dark
+      ? const DailyGoalToastPalette(
+          backgroundColor: Color(0xFF1E3A2C),
+          foregroundColor: Color(0xFF9FD8B5),
+        )
+      : const DailyGoalToastPalette(
+          backgroundColor: Color(0xFFD3EEDF),
+          foregroundColor: Color(0xFF2E7D57),
+        );
+
+  /// 获取学习首页「加入社群」与资源库「发现资源」共用的青色渐变横幅调色板。
+  static CyanBannerPalette cyanBannerPalette(Brightness brightness) =>
+      CyanBannerPalette.resolve(brightness);
+
+  /// 获取「听前预热卡」暖琥珀色调色板。
+  static WarmUpCardPalette warmUpCardPalette(
+    Brightness brightness,
+    ColorScheme colorScheme,
+  ) => WarmUpCardPalette.resolve(brightness, colorScheme);
+
+  /// 获取语音跟读评级徽章样式。
+  static SpeechRatingBadgeStyle speechRatingBadgeStyle(
+    SpeechRatingTier tier,
+    Brightness brightness,
+  ) => SpeechRatingBadgeStyle.resolve(tier, brightness);
+
   /// 设置类底部弹窗的分组卡片背景色。
   ///
   /// 浅色比弹层背景略灰（内凹分组，类似 iOS 分组列表）；
@@ -494,5 +558,237 @@ class AppTextStyles {
       fontWeight: FontWeight.w600,
       color: theme.colorScheme.onSurface,
     );
+  }
+}
+
+/// 每日目标达成提示胶囊的明暗主题配色。
+///
+/// 亮色背景需要与白色/浅灰页面拉开对比，因此取更饱和的绿；暗色收敛为深森绿底配浅绿字。
+@immutable
+class DailyGoalToastPalette {
+  final Color backgroundColor;
+  final Color foregroundColor;
+
+  const DailyGoalToastPalette({
+    required this.backgroundColor,
+    required this.foregroundColor,
+  });
+}
+
+/// 青色渐变横幅共享调色板（「加入社群」与「发现资源」入口条共用）。
+@immutable
+class CyanBannerPalette {
+  final Color backgroundStart;
+  final Color backgroundEnd;
+  final Color border;
+  final Color icon;
+  final Color title;
+  final Color subtitle;
+  final Color chevron;
+  final Color inkSplash;
+  final Color inkHighlight;
+  final List<BoxShadow> shadow;
+
+  const CyanBannerPalette({
+    required this.backgroundStart,
+    required this.backgroundEnd,
+    required this.border,
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.chevron,
+    required this.inkSplash,
+    required this.inkHighlight,
+    required this.shadow,
+  });
+
+  static CyanBannerPalette resolve(Brightness brightness) {
+    if (brightness == Brightness.dark) {
+      return const CyanBannerPalette(
+        backgroundStart: Color(0xFF102A36),
+        backgroundEnd: Color(0xFF172D46),
+        border: Color(0x6672C7D6),
+        icon: Color(0xFF8AD8E4),
+        title: Color(0xFFE7F4F8),
+        subtitle: Color(0xFFB8CBD4),
+        chevron: Color(0xCC79D6E6),
+        inkSplash: Color(0x3379D6E6),
+        inkHighlight: Color(0x1A79D6E6),
+        shadow: [],
+      );
+    }
+
+    return const CyanBannerPalette(
+      backgroundStart: Color(0xFFEAF8FA),
+      backgroundEnd: Color(0xFFDDEFFA),
+      border: Color(0xFFA9D5DF),
+      icon: Color(0xFF32758D),
+      title: Color(0xFF17384A),
+      subtitle: Color(0xFF587080),
+      chevron: Color(0xCC3B7F94),
+      inkSplash: Color(0x26256B86),
+      inkHighlight: Color(0x14256B86),
+      shadow: [
+        BoxShadow(
+          color: Color(0x1A256B86),
+          blurRadius: 16,
+          offset: Offset(0, 7),
+        ),
+      ],
+    );
+  }
+}
+
+/// 听前预热卡（暖琥珀色调）的明暗主题调色板。
+///
+/// 不直接读取 colorScheme.tertiary 以避免主色种子变更时偏色，
+/// 与学习计划页白底蓝调主卡片形成次要引导区分。
+@immutable
+class WarmUpCardPalette {
+  final Color backgroundColor;
+  final Color borderColor;
+  final Color iconBackgroundColor;
+  final Color iconForegroundColor;
+  final Color titleColor;
+  final Color subtitleColor;
+  final Color badgeBackgroundColor;
+  final Color badgeForegroundColor;
+  final Color chevronColor;
+
+  const WarmUpCardPalette({
+    required this.backgroundColor,
+    required this.borderColor,
+    required this.iconBackgroundColor,
+    required this.iconForegroundColor,
+    required this.titleColor,
+    required this.subtitleColor,
+    required this.badgeBackgroundColor,
+    required this.badgeForegroundColor,
+    required this.chevronColor,
+  });
+
+  static WarmUpCardPalette resolve(
+    Brightness brightness,
+    ColorScheme colorScheme,
+  ) {
+    final isDark = brightness == Brightness.dark;
+    const amber = Color(0xFFFFB300);
+    final iconFg = isDark ? const Color(0xFFFFB74D) : const Color(0xFFE8870C);
+    final titleColor = isDark
+        ? const Color(0xFFFFE2B8)
+        : const Color(0xFF5A3A12);
+    return WarmUpCardPalette(
+      backgroundColor: isDark
+          ? Color.alphaBlend(amber.withValues(alpha: 0.12), colorScheme.surface)
+          : const Color(0xFFFFF4E2),
+      borderColor: isDark
+          ? amber.withValues(alpha: 0.20)
+          : const Color(0xFFF4D7A8).withValues(alpha: 0.6),
+      iconBackgroundColor: amber.withValues(alpha: isDark ? 0.22 : 0.16),
+      iconForegroundColor: iconFg,
+      titleColor: titleColor,
+      subtitleColor: titleColor.withValues(alpha: isDark ? 0.70 : 0.72),
+      badgeBackgroundColor: isDark ? amber : const Color(0xFFF38B00),
+      badgeForegroundColor: isDark ? const Color(0xFF3A2400) : Colors.white,
+      chevronColor: iconFg.withValues(alpha: 0.7),
+    );
+  }
+}
+
+/// 语音跟读评级档位，按从高到低排列。
+enum SpeechRatingTier { perfect, excellent, good, fair, keepGoing }
+
+/// 语音跟读评级徽章的明暗主题渐变与前景配色样式。
+@immutable
+class SpeechRatingBadgeStyle {
+  final Color textColor;
+  final Color backgroundStart;
+  final Color backgroundEnd;
+  final Color borderColor;
+
+  const SpeechRatingBadgeStyle({
+    required this.textColor,
+    required this.backgroundStart,
+    required this.backgroundEnd,
+    required this.borderColor,
+  });
+
+  static SpeechRatingBadgeStyle resolve(
+    SpeechRatingTier tier,
+    Brightness brightness,
+  ) {
+    final isDark = brightness == Brightness.dark;
+    return switch (tier) {
+      SpeechRatingTier.perfect =>
+        isDark
+            ? const SpeechRatingBadgeStyle(
+                textColor: Color(0xFFFFE082),
+                backgroundStart: Color(0x33C9A030),
+                backgroundEnd: Color(0x1A7A5F14),
+                borderColor: Color(0x40E0B84A),
+              )
+            : const SpeechRatingBadgeStyle(
+                textColor: Color(0xFF8B6914),
+                backgroundStart: Color(0xFFFFF8E1),
+                backgroundEnd: Color(0xFFFFF0B8),
+                borderColor: Color(0xFFE0C068),
+              ),
+      SpeechRatingTier.excellent =>
+        isDark
+            ? const SpeechRatingBadgeStyle(
+                textColor: Color(0xFFB9F5C8),
+                backgroundStart: Color(0x3347B66B),
+                backgroundEnd: Color(0x1A245B38),
+                borderColor: Color(0x4057C878),
+              )
+            : const SpeechRatingBadgeStyle(
+                textColor: Color(0xFF1E7A3D),
+                backgroundStart: Color(0xFFEAF8EF),
+                backgroundEnd: Color(0xFFDDF2E4),
+                borderColor: Color(0xFFA8D6B6),
+              ),
+      SpeechRatingTier.good =>
+        isDark
+            ? const SpeechRatingBadgeStyle(
+                textColor: Color(0xFFE4F3B2),
+                backgroundStart: Color(0x33A4B84B),
+                backgroundEnd: Color(0x1A56611F),
+                borderColor: Color(0x40BDD460),
+              )
+            : const SpeechRatingBadgeStyle(
+                textColor: Color(0xFF687A18),
+                backgroundStart: Color(0xFFF6F8DF),
+                backgroundEnd: Color(0xFFEEF3C8),
+                borderColor: Color(0xFFD6DD9A),
+              ),
+      SpeechRatingTier.fair =>
+        isDark
+            ? const SpeechRatingBadgeStyle(
+                textColor: Color(0xFFF7D79B),
+                backgroundStart: Color(0x33C68A38),
+                backgroundEnd: Color(0x1A6D4617),
+                borderColor: Color(0x40E0A450),
+              )
+            : const SpeechRatingBadgeStyle(
+                textColor: Color(0xFF8A5A14),
+                backgroundStart: Color(0xFFFFF1DD),
+                backgroundEnd: Color(0xFFF9E3BF),
+                borderColor: Color(0xFFE6C48C),
+              ),
+      SpeechRatingTier.keepGoing =>
+        isDark
+            ? const SpeechRatingBadgeStyle(
+                textColor: Color(0xFFB0BEC5),
+                backgroundStart: Color(0x33607D8B),
+                backgroundEnd: Color(0x1A37474F),
+                borderColor: Color(0x4078909C),
+              )
+            : const SpeechRatingBadgeStyle(
+                textColor: Color(0xFF546E7A),
+                backgroundStart: Color(0xFFECEFF1),
+                backgroundEnd: Color(0xFFE0E4E8),
+                borderColor: Color(0xFFB0BEC5),
+              ),
+    };
   }
 }

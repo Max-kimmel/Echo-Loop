@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <!--
@@ -18,23 +18,172 @@
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Professional English listening practice application">
+  <meta name="theme-color" content="#1976D2">
 
-  <!-- iOS meta tags & icons -->
+  <title>Echo Loop — Listen-to-Speak English Loop &amp; Shadowing App</title>
+  <meta name="description" content="Master English listening and speaking with an automated loop of intensive listening, offline shadowing evaluation, blind listening, retelling, and spaced review.">
+  <meta name="keywords" content="Echo Loop, English listening, English shadowing, spaced repetition, intensive listening, language learning, offline ASR, iOS, Android">
+  <meta name="author" content="Thomas Tao">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+  <!-- Canonical & Language Alternates -->
+  <link rel="canonical" href="https://www.echo-loop.top/">
+  <link rel="alternate" hreflang="en" href="https://www.echo-loop.top/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://www.echo-loop.top/zh-CN">
+  <link rel="alternate" hreflang="x-default" href="https://www.echo-loop.top/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Echo Loop">
+  <meta property="og:title" content="Echo Loop — Listen-to-Speak English Loop &amp; Shadowing App">
+  <meta property="og:description" content="Automated English training loop: intensive listening, shadowing, blind listening, retelling, and 28-day spaced review on iOS, Android, macOS, and Windows.">
+  <meta property="og:url" content="https://www.echo-loop.top/">
+  <meta property="og:image" content="https://www.echo-loop.top/og.png">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@EchoLoopApp">
+  <meta name="twitter:creator" content="@Thomas_Tao_1">
+  <meta name="twitter:title" content="Echo Loop — Listen-to-Speak English Loop &amp; Shadowing App">
+  <meta name="twitter:description" content="Build your English listen-to-speak training loop with intensive listening, offline shadowing feedback, retelling, and spaced repetition.">
+  <meta name="twitter:image" content="https://www.echo-loop.top/og.png">
+
+  <!-- iOS Smart App Banner & PWA meta tags -->
+  <meta name="apple-itunes-app" content="app-id=6760324074">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Echo Loop">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png" />
-
-  <title>Echo Loop</title>
+  <!-- Favicon & Manifest -->
+  <link rel="icon" type="image/png" href="favicon.png">
   <link rel="manifest" href="manifest.json">
+
+  <!-- Schema.org Structured Data for Search & AI Engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.echo-loop.top/#organization",
+        "name": "Echo Loop",
+        "url": "https://www.echo-loop.top/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.echo-loop.top/icons/Icon-512.png"
+        },
+        "founder": {
+          "@type": "Person",
+          "name": "Thomas Tao"
+        },
+        "sameAs": [
+          "https://github.com/echo-loop/Echo-Loop",
+          "https://atomgit.com/echo-loop/Echo-Loop",
+          "https://space.bilibili.com/509449049/upload/video",
+          "https://xhslink.cn/m/4zOdGUcDH4N"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.echo-loop.top/#website",
+        "url": "https://www.echo-loop.top/",
+        "name": "Echo Loop",
+        "publisher": {
+          "@id": "https://www.echo-loop.top/#organization"
+        },
+        "inLanguage": ["en", "zh-CN"]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://www.echo-loop.top/#app",
+        "name": "Echo Loop",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "iOS, Android, macOS, Windows",
+        "description": "Open-source English listening and speaking training app that guides learners through intensive listening, shadowing, blind listening, retelling, and 7-round spaced review.",
+        "url": "https://www.echo-loop.top/",
+        "installUrl": "https://apps.apple.com/app/id6760324074",
+        "downloadUrl": "https://github.com/echo-loop/Echo-Loop/releases",
+        "softwareVersion": "1.0.47",
+        "license": "https://github.com/echo-loop/Echo-Loop/blob/main/LICENSE",
+        "publisher": {
+          "@id": "https://www.echo-loop.top/#organization"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "description": "Core learning loop, unlimited audio imports, offline shadowing evaluation, local transcription, offline dictionary, and spaced review are free. Optional membership supports cloud AI explanations."
+        },
+        "featureList": [
+          "Automated 8-stage listen-to-speak loop (intensive listening, shadowing, blind listening, retelling, 7 spaced review rounds up to 28 days)",
+          "Sentence-by-sentence intensive listening with sense-group splitting and AI explanations",
+          "On-device speech recognition shadowing evaluation and word-level highlighting",
+          "Offline subtitle transcription and local Kokoro TTS playback",
+          "Saved hard sentences, words, and sense groups with contextualized flashcard review",
+          "Import local audio/video (MP3, M4A, WAV, MP4), SRT/VTT/LRC subtitles, podcasts, and direct links"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.echo-loop.top/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Echo Loop and how does it work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Echo Loop is an open-source English listening and speaking training app built around a structured loop: sentence-by-sentence intensive listening, shadowing, blind listening, paragraph retelling, and 7 rounds of spaced review spanning 6 hours to 28 days."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Echo Loop free and does it work offline?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "All core learning features are free with unlimited material imports and favorites, and work offline including playback, shadowing evaluation, local subtitle transcription, dictionary lookup, and spaced review. Cloud AI explanation features include a free monthly quota."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What audio and subtitle formats does Echo Loop support?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Echo Loop supports MP3, M4A, WAV, AAC, FLAC audio, MP4/MOV/M4V/MKV video, and SRT, VTT, LRC subtitles from local files, direct links, Baidu Netdisk, and podcast RSS feeds."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
+  <noscript>
+    <main style="max-width:720px;margin:48px auto;padding:0 20px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#1f2937;">
+      <h1>Echo Loop — Listen-to-Speak English Training App</h1>
+      <p><strong>Turn real audio into active spoken English.</strong> Echo Loop guides you step by step through <strong>intensive listening, shadowing, blind listening, retelling, and 7 rounds of spaced review (6 hours to 28 days)</strong> without manual planning.</p>
+      <h2>Core Capabilities</h2>
+      <ul>
+        <li><strong>Automated Learning Loop</strong>: Structured progression from sentence-level comprehension to fluent paragraph retelling.</li>
+        <li><strong>Sense-Group Splitting &amp; AI Explanations</strong>: Break down complex English sentences on demand.</li>
+        <li><strong>Offline Speech Evaluation &amp; Transcription</strong>: Practice shadowing and generate subtitles privately on your device.</li>
+        <li><strong>Contextualized Spaced Review</strong>: Saved hard sentences, words, and sense groups reviewed in original context.</li>
+      </ul>
+      <h2>Download &amp; Source Code</h2>
+      <p>
+        <a href="https://apps.apple.com/app/id6760324074">Download on the App Store (iOS)</a> &middot;
+        <a href="https://play.google.com/store/apps/details?id=app.echoloop">Get it on Google Play (Android)</a> &middot;
+        <a href="https://github.com/echo-loop/Echo-Loop">Source Code on GitHub (AGPL-3.0)</a>
+      </p>
+      <p>Please enable JavaScript in your browser to launch the interactive Echo Loop web application.</p>
+    </main>
+  </noscript>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 
