@@ -317,7 +317,7 @@ class _CurrentDueNotice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    const accent = Color(0xFFC56B45);
+    const accent = AppTheme.reviewAgainColor;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       decoration: BoxDecoration(
