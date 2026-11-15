@@ -17,6 +17,9 @@ import 'package_info_provider.dart';
 import 'settings_provider.dart';
 import 'tag_provider.dart';
 
+/// 当前应用支持的最新备份数据库 schema 版本号。
+const int currentBackupSchemaVersion = AppDatabase.currentSchemaVersion;
+
 /// BackupService Provider
 final backupServiceProvider = Provider<BackupService>((ref) {
   return BackupService(ref.watch(appDatabaseProvider));

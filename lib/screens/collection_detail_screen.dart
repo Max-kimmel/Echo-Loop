@@ -492,7 +492,7 @@ class _PodcastCollectionBody extends StatelessWidget {
           physics: const AlwaysScrollableScrollPhysics(),
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.5,
+              height: MediaQuery.sizeOf(context).height * 0.5,
               child: Center(
                 child: Text(
                   l10n.communityCollectionEmpty,

@@ -195,13 +195,13 @@ class _CreateCollectionFlowSheetState
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final bottomInset = MediaQuery.of(context).viewInsets.bottom;
+    final bottomInset = MediaQuery.viewInsetsOf(context).bottom;
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.fromLTRB(16, 0, 16, 16 + bottomInset),
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height * 0.86,
+            maxHeight: MediaQuery.sizeOf(context).height * 0.86,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,

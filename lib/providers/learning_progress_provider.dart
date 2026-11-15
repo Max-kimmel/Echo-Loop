@@ -22,6 +22,8 @@ import 'learning_settings_provider.dart';
 import 'notification_permission_provider.dart';
 import 'time_provider.dart';
 
+export '../database/daos/stage_completion_dao.dart' show RecentCompletion;
+
 part 'learning_progress_provider.g.dart';
 
 /// 学习进度状态

@@ -25,6 +25,7 @@ import '../models/sentence.dart';
 import '../models/word_highlight_binding.dart';
 import '../screens/sentence_detail_screen.dart';
 import '../providers/audio_engine/audio_engine_provider.dart';
+import '../providers/audio_sentences_provider.dart' show audioNameByIdProvider;
 import '../providers/short_audio_player_provider.dart';
 import '../providers/tts/tts_controller_provider.dart';
 import '../providers/pronunciation/pronunciation_providers.dart';
@@ -1488,11 +1489,10 @@ class _SavedPhraseTileState extends ConsumerState<_SavedPhraseTile> {
   Future<void> _loadAudioName() async {
     final audioId = widget.savedPhrase.audioItemId;
     if (audioId == null) return;
-    final dao = ref.read(audioItemDaoProvider);
-    final row = await dao.getById(audioId);
+    final name = await ref.read(audioNameByIdProvider(audioId).future);
     if (mounted) {
       setState(() {
-        _audioName = row?.name;
+        _audioName = name;
         _sourceAudioResolved = true;
       });
     }
@@ -1752,11 +1752,10 @@ class _SavedWordTileState extends ConsumerState<_SavedWordTile> {
   Future<void> _loadAudioName() async {
     final audioId = widget.savedWord.audioItemId;
     if (audioId == null) return;
-    final dao = ref.read(audioItemDaoProvider);
-    final row = await dao.getById(audioId);
+    final name = await ref.read(audioNameByIdProvider(audioId).future);
     if (mounted) {
       setState(() {
-        _audioName = row?.name;
+        _audioName = name;
         _sourceAudioResolved = true;
       });
     }

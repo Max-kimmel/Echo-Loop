@@ -74,7 +74,7 @@ class EditTagMembershipSheet extends ConsumerWidget {
             else
               ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxHeight: MediaQuery.of(context).size.height * 0.4,
+                  maxHeight: MediaQuery.sizeOf(context).height * 0.4,
                 ),
                 child: ListView.separated(
                   shrinkWrap: true,
@@ -130,7 +130,7 @@ class EditTagMembershipSheet extends ConsumerWidget {
                 l10n.createTag,
                 style: TextStyle(color: theme.colorScheme.primary),
               ),
-              onTap: () => _showCreateTagDialog(context, ref),
+              onTap: () => _showCreateTagDialog(context),
             ),
           ],
         ),
@@ -172,134 +172,142 @@ class EditTagMembershipSheet extends ConsumerWidget {
   }
 
   /// 创建新标签对话框
-  void _showCreateTagDialog(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context)!;
-    final controller = TextEditingController();
-    int selectedColor = kTagColors[0];
-
-    showDialog(
+  void _showCreateTagDialog(BuildContext context) {
+    showDialog<void>(
       context: context,
-      builder: (ctx) => StatefulBuilder(
-        builder: (ctx, setDialogState) {
-          final isEmpty = controller.text.trim().isEmpty;
-          return AlertDialog(
-            title: Text(l10n.createTag, textAlign: TextAlign.center),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextField(
-                  controller: controller,
-                  autofocus: true,
-                  style: compactFormTextStyle(context),
-                  decoration: compactFormInputDecoration(
-                    context,
-                    labelText: l10n.tagName,
-                    hintText: l10n.enterTagName,
-                  ),
-                  onChanged: (_) => setDialogState(() {}),
-                  onSubmitted: (_) {
-                    if (!isEmpty) {
-                      _createAndAssign(ctx, ref, controller, selectedColor);
-                    }
-                  },
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  l10n.selectColor,
-                  style: Theme.of(ctx).textTheme.bodySmall,
-                ),
-                const SizedBox(height: 8),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: kTagColors.map((colorValue) {
-                    final isChosen = colorValue == selectedColor;
-                    return GestureDetector(
-                      onTap: () {
-                        setDialogState(() {
-                          selectedColor = colorValue;
-                        });
-                      },
-                      child: Container(
-                        width: 32,
-                        height: 32,
-                        decoration: BoxDecoration(
-                          color: Color(colorValue),
-                          shape: BoxShape.circle,
-                          border: isChosen
-                              ? Border.all(
-                                  color: Theme.of(ctx).colorScheme.onSurface,
-                                  width: 2,
-                                )
-                              : null,
-                        ),
-                        child: isChosen
-                            ? const Icon(
-                                Icons.check,
-                                size: 18,
-                                color: Colors.white,
-                              )
-                            : null,
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ],
-            ),
-            actionsPadding: const EdgeInsets.fromLTRB(24, 0, 24, 20),
-            actions: [
-              Row(
-                children: [
-                  Expanded(
-                    child: TextButton(
-                      onPressed: () => Navigator.pop(ctx),
-                      child: Text(l10n.cancel),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: FilledButton(
-                      onPressed: isEmpty
-                          ? null
-                          : () => _createAndAssign(
-                              ctx,
-                              ref,
-                              controller,
-                              selectedColor,
-                            ),
-                      child: Text(l10n.add),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          );
-        },
-      ),
+      builder: (_) => _CreateTagDialog(audioId: audioId),
     );
   }
+}
 
-  /// 创建标签并自动关联到当前音频
-  Future<void> _createAndAssign(
-    BuildContext dialogContext,
-    WidgetRef ref,
-    TextEditingController controller,
-    int colorValue,
-  ) async {
-    final name = controller.text.trim();
+/// 创建新标签弹窗，独立托管输入控制器生命周期。
+class _CreateTagDialog extends ConsumerStatefulWidget {
+  final String audioId;
+
+  const _CreateTagDialog({required this.audioId});
+
+  @override
+  ConsumerState<_CreateTagDialog> createState() => _CreateTagDialogState();
+}
+
+class _CreateTagDialogState extends ConsumerState<_CreateTagDialog> {
+  final TextEditingController _controller = TextEditingController();
+  int _selectedColor = kTagColors[0];
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Future<void> _createAndAssign() async {
+    final name = _controller.text.trim();
     if (name.isEmpty) return;
 
     final notifier = ref.read(tagListProvider.notifier);
-    await notifier.createTag(name, colorValue);
+    await notifier.createTag(name, _selectedColor);
+    if (!mounted) return;
 
     // 获取新创建的标签 ID 并立刻关联
     final tags = ref.read(tagListProvider).tags;
     final newTag = tags.lastWhere((t) => t.name == name);
-    await notifier.addAudioToTag(newTag.id, audioId);
+    await notifier.addAudioToTag(newTag.id, widget.audioId);
 
-    if (dialogContext.mounted) {
-      Navigator.pop(dialogContext);
+    if (mounted) {
+      Navigator.pop(context);
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final isEmpty = _controller.text.trim().isEmpty;
+
+    return AlertDialog(
+      title: Text(l10n.createTag, textAlign: TextAlign.center),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextField(
+            controller: _controller,
+            autofocus: true,
+            style: compactFormTextStyle(context),
+            decoration: compactFormInputDecoration(
+              context,
+              labelText: l10n.tagName,
+              hintText: l10n.enterTagName,
+            ),
+            onChanged: (_) => setState(() {}),
+            onSubmitted: (_) {
+              if (!isEmpty) {
+                _createAndAssign();
+              }
+            },
+          ),
+          const SizedBox(height: 16),
+          Text(
+            l10n.selectColor,
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: kTagColors.map((colorValue) {
+              final isChosen = colorValue == _selectedColor;
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _selectedColor = colorValue;
+                  });
+                },
+                child: Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    color: Color(colorValue),
+                    shape: BoxShape.circle,
+                    border: isChosen
+                        ? Border.all(
+                            color: Theme.of(context).colorScheme.onSurface,
+                            width: 2,
+                          )
+                        : null,
+                  ),
+                  child: isChosen
+                      ? const Icon(
+                          Icons.check,
+                          size: 18,
+                          color: Colors.white,
+                        )
+                      : null,
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+      actionsPadding: const EdgeInsets.fromLTRB(24, 0, 24, 20),
+      actions: [
+        Row(
+          children: [
+            Expanded(
+              child: TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(l10n.cancel),
+              ),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: FilledButton(
+                onPressed: isEmpty ? null : _createAndAssign,
+                child: Text(l10n.add),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }

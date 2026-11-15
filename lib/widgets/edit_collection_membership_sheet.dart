@@ -77,7 +77,7 @@ class EditCollectionMembershipSheet extends ConsumerWidget {
             else
               ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxHeight: MediaQuery.of(context).size.height * 0.4,
+                  maxHeight: MediaQuery.sizeOf(context).height * 0.4,
                 ),
                 child: ListView.separated(
                   shrinkWrap: true,

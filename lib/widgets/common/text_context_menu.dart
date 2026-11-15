@@ -162,7 +162,7 @@ class _ToastOverlayState extends State<_ToastOverlay>
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: MediaQuery.of(context).viewInsets.bottom + 80,
+      bottom: MediaQuery.viewInsetsOf(context).bottom + 80,
       left: 0,
       right: 0,
       child: Center(

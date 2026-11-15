@@ -428,21 +428,37 @@ private final class IOSSpeechPracticeHandler: NSObject, FlutterStreamHandler {
     isRecording = false
     recognitionRequest?.endAudio()
     audioFile = nil
-    if let fileURL = currentFileURL {
-      trimRecordingIfNeeded(fileURL: fileURL)
-    }
-    result([
-      "filePath": currentFileURL?.path as Any,
-      "diagnostics": vadThreshold.describe(),
-    ])
+    let fileURL = currentFileURL
+    let diagnostics = vadThreshold.describe()
+    let shouldEmitEmptyFinal = !recognitionEnabled
+    let promptId = currentPromptId
 
-    // 纯录音模式（无 ASR）：手动发空 finalTranscriptReady，与 Android 行为对齐。
-    if !recognitionEnabled, let promptId = currentPromptId {
-      emitEvent([
-        "type": "finalTranscriptReady",
-        "promptId": promptId,
-        "transcript": "",
+    let finishStop = { [weak self] in
+      result([
+        "filePath": fileURL?.path as Any,
+        "diagnostics": diagnostics,
       ])
+
+      // 纯录音模式（无 ASR）：手动发空 finalTranscriptReady，与 Android 行为对齐。
+      if shouldEmitEmptyFinal, let promptId {
+        self?.emitEvent([
+          "type": "finalTranscriptReady",
+          "promptId": promptId,
+          "transcript": "",
+        ])
+      }
+    }
+
+    guard let fileURL else {
+      finishStop()
+      return
+    }
+
+    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+      self?.trimRecordingIfNeeded(fileURL: fileURL)
+      DispatchQueue.main.async {
+        finishStop()
+      }
     }
   }
 
@@ -489,6 +505,8 @@ private final class IOSSpeechPracticeHandler: NSObject, FlutterStreamHandler {
         "errorCode": SpeechPracticeError.noSpeech.rawValue,
         "errorMessage": error.localizedDescription
       ])
+      isRecording = false
+      cleanupSentenceState(cancelRecognition: true)
       return
     }
 
@@ -585,6 +603,7 @@ private final class IOSSpeechPracticeHandler: NSObject, FlutterStreamHandler {
   }
 
   private func trimRecordingIfNeeded(fileURL: URL) {
+    var pendingTempURL: URL?
     do {
       let sourceFile = try AVAudioFile(forReading: fileURL)
       guard let trimRange = detectSpeechRange(in: sourceFile) else {
@@ -609,6 +628,7 @@ private final class IOSSpeechPracticeHandler: NSObject, FlutterStreamHandler {
       let tempURL = fileURL.deletingLastPathComponent()
         .appendingPathComponent(UUID().uuidString)
         .appendingPathExtension("caf")
+      pendingTempURL = tempURL
       let outputFile = try AVAudioFile(
         forWriting: tempURL,
         settings: sourceFile.fileFormat.settings
@@ -634,7 +654,11 @@ private final class IOSSpeechPracticeHandler: NSObject, FlutterStreamHandler {
 
       try FileManager.default.removeItem(at: fileURL)
       try FileManager.default.moveItem(at: tempURL, to: fileURL)
+      pendingTempURL = nil
     } catch {
+      if let pendingTempURL {
+        try? FileManager.default.removeItem(at: pendingTempURL)
+      }
       // 保留原始录音即可，不阻塞识别结果返回。
     }
   }

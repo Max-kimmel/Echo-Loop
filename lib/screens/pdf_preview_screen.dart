@@ -503,9 +503,10 @@ class _PdfPreviewScreenState extends ConsumerState<PdfPreviewScreen> {
     if (builder != null) {
       return builder(context, bytes, _options.bitmask);
     }
-    final mq = MediaQuery.of(context);
     final targetPixelWidth = math.min(
-      mq.size.width * mq.devicePixelRatio * 1.75,
+      MediaQuery.sizeOf(context).width *
+          MediaQuery.devicePixelRatioOf(context) *
+          1.75,
       2800.0,
     );
     final dpi = targetPixelWidth / PdfPageFormat.a4.width * PdfPageFormat.inch;

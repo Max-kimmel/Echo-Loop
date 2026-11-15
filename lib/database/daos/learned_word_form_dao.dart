@@ -34,16 +34,18 @@ class LearnedWordFormDao extends DatabaseAccessor<AppDatabase>
   Future<void> insertIfAbsentAll(Map<String, DateTime> wordForms) async {
     if (wordForms.isEmpty) return;
 
-    await transaction(() async {
-      for (final entry in wordForms.entries) {
-        await into(learnedWordForms).insert(
-          LearnedWordFormsCompanion(
-            wordForm: Value(entry.key),
-            firstLearnedAt: Value(entry.value),
-          ),
-          mode: InsertMode.insertOrIgnore,
-        );
-      }
+    await batch((b) {
+      b.insertAll(
+        learnedWordForms,
+        [
+          for (final entry in wordForms.entries)
+            LearnedWordFormsCompanion(
+              wordForm: Value(entry.key),
+              firstLearnedAt: Value(entry.value),
+            ),
+        ],
+        mode: InsertMode.insertOrIgnore,
+      );
     });
   }
 

@@ -13,6 +13,8 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.PluginRegistry
 import java.io.File
+import java.util.concurrent.Executors
+import java.util.concurrent.RejectedExecutionException
 
 /**
  * Android 语音练习平台桥接。
@@ -34,18 +36,21 @@ class AndroidSpeechPracticeHandler(
     private val methodChannel = MethodChannel(binaryMessenger, "top.echo-loop/speech_practice")
     private val eventChannel = EventChannel(binaryMessenger, "top.echo-loop/speech_practice/events")
     private val mainHandler = Handler(Looper.getMainLooper())
+    // 单线程串口执行器，确保录音启停、WAV 头回填、静音裁剪与释放严格串行且不阻塞主线程。
+    private val audioIoExecutor = Executors.newSingleThreadExecutor()
 
     private var eventSink: EventChannel.EventSink? = null
 
     // 引擎级资源（warmup 创建，shutdown 释放）
     private val wavRecorder = WavRecorder()
     private var isEngineReady = false
+    private var isDisposed = false
 
-    // 句子级状态
+    // 句子级状态（仅在主线程读写；sessionGeneration 加 @Volatile 供 IO 线程快照校验代数）
     private var isRecording = false
     private var currentPromptId: String? = null
     private var currentFilePath: String? = null
-    private var sessionGeneration = 0
+    @Volatile private var sessionGeneration = 0
     private var finalTranscriptEmitted = false
 
     // VAD 状态
@@ -70,7 +75,7 @@ class AndroidSpeechPracticeHandler(
     init {
         methodChannel.setMethodCallHandler(this)
         eventChannel.setStreamHandler(this)
-        wavRecorder.onBuffer = { rms, frameCount -> handleVoiceActivity(rms, frameCount) }
+        attachRecorderBufferCallback()
     }
 
     // region StreamHandler
@@ -165,19 +170,33 @@ class AndroidSpeechPracticeHandler(
         }
 
         // AudioRecord 需要权限，若未授予则延迟到 startSession 再初始化。
-        if (microphonePermissionStatus() == "granted") {
-            initWavRecorder()
+        val hasPermission = microphonePermissionStatus() == "granted"
+        isEngineReady = true
+        if (!hasPermission) {
+            result.success(emptyMap<String, Any>())
+            return
         }
 
-        isEngineReady = true
-        result.success(emptyMap<String, Any>())
+        if (!runOnAudioIo {
+                initWavRecorder()
+                mainHandler.post { result.success(emptyMap<String, Any>()) }
+            }) {
+            result.success(emptyMap<String, Any>())
+        }
     }
 
     private fun shutdown(result: MethodChannel.Result) {
         isRecording = false
-        cleanupSentenceState()
-        cleanupEngine()
-        result.success(emptyMap<String, Any>())
+        sessionGeneration++
+        resetMainSentenceState()
+        isEngineReady = false
+        if (!runOnAudioIo {
+                stopWavRecorderQuietly()
+                wavRecorder.release()
+                mainHandler.post { result.success(emptyMap<String, Any>()) }
+            }) {
+            result.success(emptyMap<String, Any>())
+        }
     }
 
     private fun initWavRecorder() {
@@ -186,13 +205,14 @@ class AndroidSpeechPracticeHandler(
             if (!ok) Log.w(TAG, "WavRecorder initialization failed")
         }
         // release() 会清空 onBuffer，重新初始化后必须恢复。
-        wavRecorder.onBuffer = { rms, frameCount -> handleVoiceActivity(rms, frameCount) }
+        attachRecorderBufferCallback()
     }
 
-    private fun cleanupEngine() {
-        wavRecorder.release()
-        isEngineReady = false
-        isRecording = false
+    private fun attachRecorderBufferCallback() {
+        wavRecorder.onBuffer = { rms, frameCount ->
+            val capturedGeneration = sessionGeneration
+            mainHandler.post { handleVoiceActivityOnMain(rms, frameCount, capturedGeneration) }
+        }
     }
 
     // endregion
@@ -224,70 +244,110 @@ class AndroidSpeechPracticeHandler(
     }
 
     private fun doStartSession(promptId: String, result: MethodChannel.Result) {
-        wavRecorder.resetCaptureDiagnostics()
-        cleanupSentenceState()
         resetSentenceState(promptId)
 
         val fileName = sanitizeFileName(promptId)
         val file = File(activity.cacheDir, "$fileName-${System.currentTimeMillis()}.wav")
         currentFilePath = file.absolutePath
+        val capturedGeneration = sessionGeneration
+        val hasPermission = microphonePermissionStatus() == "granted"
+        isRecording = true
 
-        // 延迟初始化 AudioRecord（权限可能在 warmup 之后才授予）。
-        if (!wavRecorder.isInitialized) initWavRecorder()
-        if (wavRecorder.isInitialized) {
-            wavRecorder.startRecording(file.absolutePath)
+        runOnAudioIo {
+            stopWavRecorderQuietly()
+            if (sessionGeneration != capturedGeneration) return@runOnAudioIo
+            wavRecorder.resetCaptureDiagnostics()
+            // 延迟初始化 AudioRecord（权限可能在 warmup 之后才授予）。
+            if (!wavRecorder.isInitialized && hasPermission) initWavRecorder()
+            if (wavRecorder.isInitialized && sessionGeneration == capturedGeneration) {
+                try {
+                    wavRecorder.startRecording(file.absolutePath)
+                } catch (e: Exception) {
+                    Log.w(TAG, "WavRecorder.startRecording failed", e)
+                }
+            }
         }
 
-        isRecording = true
         result.success(mapOf("filePath" to file.absolutePath))
     }
 
     private fun stopSession(result: MethodChannel.Result) {
         isRecording = false
         val promptId = currentPromptId ?: ""
-
-        val filePath = if (wavRecorder.isInitialized) {
-            wavRecorder.stopRecording()
-        } else {
-            currentFilePath
-        }
-
-        val wavBeforeTrim = filePath?.let(wavRecorder::wavFileMetrics)
-
-        // 裁剪首尾静音（对齐 iOS/macOS）。
-        if (!filePath.isNullOrEmpty()) {
-            wavRecorder.trimSilence(filePath)
-        }
-        val wavAfterTrim = filePath?.let(wavRecorder::wavFileMetrics)
-        val diagnostics = buildString {
-            append(wavRecorder.captureDiagnostics())
-            append(" ${vadThreshold.describe()}")
-            append(" wavBeforeTrim=$wavBeforeTrim")
-            append(" wavAfterTrim=$wavAfterTrim")
-        }
-
-        // 确保 Dart 侧总能收到 finalTranscriptReady，避免等超时。
-        if (!finalTranscriptEmitted) {
+        val fallbackPath = currentFilePath
+        val vadDescription = vadThreshold.describe()
+        val shouldEmitFinal = !finalTranscriptEmitted
+        if (shouldEmitFinal) {
             finalTranscriptEmitted = true
-            emitEvent(mapOf(
-                "type" to "finalTranscriptReady",
-                "promptId" to promptId,
-                "transcript" to "",
-            ))
         }
 
-        result.success(
-            mapOf(
-                "filePath" to (filePath ?: ""),
-                "diagnostics" to diagnostics,
-            ),
-        )
+        val scheduled = runOnAudioIo {
+            val filePath = if (wavRecorder.isInitialized) {
+                wavRecorder.stopRecording() ?: fallbackPath
+            } else {
+                fallbackPath
+            }
+            val wavBeforeTrim = filePath?.let(wavRecorder::wavFileMetrics)
+            // 裁剪首尾静音（对齐 iOS/macOS），在单线程串口 IO 执行器上完成避免卡顿主线程。
+            if (!filePath.isNullOrEmpty()) {
+                wavRecorder.trimSilence(filePath)
+            }
+            val wavAfterTrim = filePath?.let(wavRecorder::wavFileMetrics)
+            val captureDiagnostics = wavRecorder.captureDiagnostics()
+
+            mainHandler.post {
+                val diagnostics = buildString {
+                    append(captureDiagnostics)
+                    append(" $vadDescription")
+                    append(" wavBeforeTrim=$wavBeforeTrim")
+                    append(" wavAfterTrim=$wavAfterTrim")
+                }
+
+                // 确保 Dart 侧总能收到 finalTranscriptReady，避免等超时。
+                if (shouldEmitFinal && !isDisposed) {
+                    emitEvent(mapOf(
+                        "type" to "finalTranscriptReady",
+                        "promptId" to promptId,
+                        "transcript" to "",
+                    ))
+                }
+
+                result.success(
+                    mapOf(
+                        "filePath" to (filePath ?: ""),
+                        "diagnostics" to diagnostics,
+                    ),
+                )
+            }
+        }
+
+        if (!scheduled) {
+            if (shouldEmitFinal && !isDisposed) {
+                emitEvent(mapOf(
+                    "type" to "finalTranscriptReady",
+                    "promptId" to promptId,
+                    "transcript" to "",
+                ))
+            }
+            result.success(
+                mapOf(
+                    "filePath" to (fallbackPath ?: ""),
+                    "diagnostics" to vadDescription,
+                ),
+            )
+        }
     }
 
     private fun cancelSession(result: MethodChannel.Result) {
         isRecording = false
-        cleanupSentenceState()
-        result.success(emptyMap<String, Any>())
+        sessionGeneration++
+        resetMainSentenceState()
+        if (!runOnAudioIo {
+                stopWavRecorderQuietly()
+                mainHandler.post { result.success(emptyMap<String, Any>()) }
+            }) {
+            result.success(emptyMap<String, Any>())
+        }
     }
 
     // endregion
@@ -297,7 +357,11 @@ class AndroidSpeechPracticeHandler(
     private fun deleteRecording(call: MethodCall, result: MethodChannel.Result) {
         val filePath = call.argument<String>("filePath")
         if (!filePath.isNullOrEmpty()) {
-            try { File(filePath).delete() } catch (_: Exception) {}
+            if (!runOnAudioIo {
+                    try { File(filePath).delete() } catch (_: Exception) {}
+                }) {
+                try { File(filePath).delete() } catch (_: Exception) {}
+            }
         }
         if (currentFilePath == filePath) {
             currentFilePath = null
@@ -309,9 +373,13 @@ class AndroidSpeechPracticeHandler(
 
     // region VAD
 
-    /** 在 IO 线程被 WavRecorder 调用，处理 VAD 逻辑并发事件到主线程。 */
-    private fun handleVoiceActivity(rms: Float, frameCount: Int) {
-        if (!isRecording) return
+    /** 仅在主线程执行，避免与 resetSentenceState/stopSession 并发读写非同步字段。 */
+    private fun handleVoiceActivityOnMain(
+        rms: Float,
+        frameCount: Int,
+        capturedGeneration: Int,
+    ) {
+        if (isDisposed || !isRecording || sessionGeneration != capturedGeneration) return
         val promptId = currentPromptId ?: return
 
         val bufferDurationMs = (frameCount.toDouble() / 16000.0) * 1000.0
@@ -359,9 +427,30 @@ class AndroidSpeechPracticeHandler(
 
     // region 内部工具
 
+    private fun runOnAudioIo(task: () -> Unit): Boolean {
+        if (isDisposed || audioIoExecutor.isShutdown) return false
+        return try {
+            audioIoExecutor.execute(task)
+            true
+        } catch (_: RejectedExecutionException) {
+            false
+        }
+    }
+
+    private fun stopWavRecorderQuietly() {
+        if (wavRecorder.isInitialized) {
+            try { wavRecorder.stopRecording() } catch (_: Exception) {}
+        }
+    }
+
     private fun resetSentenceState(promptId: String) {
         sessionGeneration++
+        resetMainSentenceState()
         currentPromptId = promptId
+    }
+
+    private fun resetMainSentenceState() {
+        currentPromptId = null
         currentFilePath = null
         finalTranscriptEmitted = false
         hasDetectedSpeech = false
@@ -373,23 +462,15 @@ class AndroidSpeechPracticeHandler(
         vadThreshold.reset()
     }
 
-    private fun cleanupSentenceState() {
-        if (wavRecorder.isInitialized) {
-            try { wavRecorder.stopRecording() } catch (_: Exception) {}
-        }
-        currentPromptId = null
-        hasDetectedSpeech = false
-        silenceStartAt = 0L
-        lastReportedSilenceMs = -1
-        finalTranscriptEmitted = false
-        recordedDurationMs = 0.0
-        firstDetectedSpeechMs = null
-        lastDetectedSpeechMs = null
-        vadThreshold.reset()
-    }
-
     private fun emitEvent(event: Map<String, Any>) {
-        mainHandler.post { eventSink?.success(event) }
+        if (isDisposed) return
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            eventSink?.success(event)
+        } else {
+            mainHandler.post {
+                if (!isDisposed) eventSink?.success(event)
+            }
+        }
     }
 
     private fun sanitizeFileName(promptId: String): String {
@@ -401,9 +482,16 @@ class AndroidSpeechPracticeHandler(
     /** 页面退出时由 MainActivity 调用。 */
     fun dispose() {
         isRecording = false
-        cleanupSentenceState()
-        cleanupEngine()
+        sessionGeneration++
+        resetMainSentenceState()
+        isEngineReady = false
         methodChannel.setMethodCallHandler(null)
         eventChannel.setStreamHandler(null)
+        runOnAudioIo {
+            stopWavRecorderQuietly()
+            wavRecorder.release()
+        }
+        isDisposed = true
+        audioIoExecutor.shutdown()
     }
 }

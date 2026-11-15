@@ -9,7 +9,6 @@ import '../analytics/models/event_names.dart';
 import '../features/usage/usage_event.dart';
 import '../features/usage/usage_providers.dart';
 import '../services/runtime_endpoint_router.dart';
-import '../database/daos/stage_completion_dao.dart';
 import '../database/enums.dart';
 import '../l10n/app_localizations.dart';
 import '../models/audio_item.dart';
@@ -71,8 +70,12 @@ class _StudyScreenState extends ConsumerState<StudyScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final audioLibraryState = ref.watch(audioLibraryProvider);
-    final progressState = ref.watch(learningProgressProvider);
+    final isAudioLibraryLoading = ref.watch(
+      audioLibraryProvider.select((s) => s.isLoading),
+    );
+    final isProgressLoading = ref.watch(
+      learningProgressProvider.select((s) => s.isLoading),
+    );
     final tasks = ref.watch(studyTaskProvider);
     final completedAudios = ref.watch(completedAudioProvider);
     final now = ref.watch(nowProvider)();
@@ -92,8 +95,7 @@ class _StudyScreenState extends ConsumerState<StudyScreen> {
         ),
       );
     });
-    final isBootstrappingStudy =
-        audioLibraryState.isLoading || progressState.isLoading;
+    final isBootstrappingStudy = isAudioLibraryLoading || isProgressLoading;
 
     final recentCompletionsAsync = ref.watch(recentCompletionsProvider);
     final hasRecentCompletions =

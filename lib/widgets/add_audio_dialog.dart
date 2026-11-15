@@ -186,7 +186,7 @@ class _AddAudioDialogState extends ConsumerState<AddAudioDialog> {
     // 自适应宽度：默认 AlertDialog 在窄屏（如 360dp 手机）会被 insetPadding 挤到
     // 极窄，文件名只能显示省略号；这里把侧边 inset 收紧到 16dp，并按屏幕宽度的
     // 90% 取宽（封顶 560dp，符合 Material 3 dialog 上限）。
-    final screenWidth = MediaQuery.of(context).size.width;
+    final screenWidth = MediaQuery.sizeOf(context).width;
     final dialogWidth = (screenWidth - 32).clamp(280.0, 560.0);
     return AlertDialog(
       insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),

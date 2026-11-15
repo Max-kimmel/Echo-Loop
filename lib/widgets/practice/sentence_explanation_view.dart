@@ -24,7 +24,6 @@ import '../../features/remote_config/remote_config_providers.dart';
 import '../../features/subscription/widgets/ai_quota_exceeded_dialog.dart';
 import '../../features/usage/usage_event.dart';
 import '../../features/usage/usage_providers.dart';
-import '../../database/providers.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/audio_item.dart' as app_model;
 import '../../models/sense_group_result.dart';
@@ -676,11 +675,10 @@ class _SentenceExplanationViewState
     );
     if (noticeStore.hasSeenSyntheticTimingNotice) return true;
 
-    final audioItem = await ref.read(audioItemDaoProvider).getById(audioItemId);
+    final source = await loadAudioTranscriptSource(ref, audioItemId);
     if (!mounted || widget.audioItemId != audioItemId) return false;
     // 本地上传与设备离线转录的词级时间戳都是合成近似值，均需提示；AI 转录自带
     // 真实词级时间戳，无需提示。
-    final source = audioItem?.transcriptSource;
     if (source != app_model.TranscriptSource.local.index &&
         source != app_model.TranscriptSource.device.index) {
       return true;

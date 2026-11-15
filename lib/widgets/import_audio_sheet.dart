@@ -91,7 +91,7 @@ class _ImportAudioFlowSheetState extends ConsumerState<ImportAudioFlowSheet> {
     );
     final busy = _isBusy(state) || baiduState.isBusy || _localImporting;
     final importing = _isBusy(state) || _localImporting;
-    final bottomInset = MediaQuery.of(context).viewInsets.bottom;
+    final bottomInset = MediaQuery.viewInsetsOf(context).bottom;
 
     return PopScope(
       canPop: !importing,
@@ -100,7 +100,7 @@ class _ImportAudioFlowSheetState extends ConsumerState<ImportAudioFlowSheet> {
           padding: EdgeInsets.fromLTRB(16, 0, 16, 16 + bottomInset),
           child: ConstrainedBox(
             constraints: BoxConstraints(
-              maxHeight: MediaQuery.of(context).size.height * 0.86,
+              maxHeight: MediaQuery.sizeOf(context).height * 0.86,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -806,7 +806,7 @@ class _BaiduNetdiskPanelState extends ConsumerState<_BaiduNetdiskPanel> {
               if (velocity > 300) widget.onBack();
             },
       child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.58,
+        height: MediaQuery.sizeOf(context).height * 0.58,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

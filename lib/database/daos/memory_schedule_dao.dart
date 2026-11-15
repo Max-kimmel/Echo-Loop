@@ -47,13 +47,33 @@ class MemoryScheduleDao extends DatabaseAccessor<AppDatabase>
   Future<List<MemorySchedule>> getBySubjects(
     Iterable<({String namespace, String subjectId})> subjects,
   ) async {
-    final result = <MemorySchedule>[];
+    final idsByNamespace = <String, Set<String>>{};
     for (final subject in subjects) {
-      final row = await getBySubject(
-        namespace: subject.namespace,
-        subjectId: subject.subjectId,
-      );
-      if (row != null) result.add(row);
+      idsByNamespace
+          .putIfAbsent(subject.namespace, () => <String>{})
+          .add(subject.subjectId);
+    }
+    if (idsByNamespace.isEmpty) return [];
+
+    // 按 SQLite 参数上限分片，将按条 N+1 查询合并为按 namespace 批量 IN 查询。
+    const chunkSize = 500;
+    final result = <MemorySchedule>[];
+    for (final entry in idsByNamespace.entries) {
+      final subjectIds = entry.value.toList(growable: false);
+      for (var offset = 0; offset < subjectIds.length; offset += chunkSize) {
+        final end = offset + chunkSize < subjectIds.length
+            ? offset + chunkSize
+            : subjectIds.length;
+        final chunk = subjectIds.sublist(offset, end);
+        final rows =
+            await (select(memorySchedules)..where(
+                  (table) =>
+                      table.namespace.equals(entry.key) &
+                      table.subjectId.isIn(chunk),
+                ))
+                .get();
+        result.addAll(rows);
+      }
     }
     return result;
   }

@@ -8,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../database/app_database.dart';
 import '../analytics/analytics_providers.dart';
 import '../analytics/models/event_names.dart';
 import '../l10n/app_localizations.dart';
@@ -122,7 +121,7 @@ class _BackupRestoreScreenState extends ConsumerState<BackupRestoreScreen> {
       }
       return;
     }
-    if (manifest.schemaVersion > AppDatabase.currentSchemaVersion) {
+    if (manifest.schemaVersion > currentBackupSchemaVersion) {
       if (mounted) _showError(l10n.importIncompatible);
       return;
     }

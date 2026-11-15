@@ -14,6 +14,8 @@
 ///   令投影重解析，保证与真相源同步。
 library;
 
+import 'package:flutter_riverpod/flutter_riverpod.dart'
+    show FutureProvider, WidgetRef;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../database/providers.dart';
@@ -21,6 +23,22 @@ import '../models/sentence.dart';
 import '../services/subtitle_parser.dart';
 
 part 'audio_sentences_provider.g.dart';
+
+/// 读取指定音频的字幕来源枚举索引（`TranscriptSource.index`）。
+Future<int?> loadAudioTranscriptSource(WidgetRef ref, String audioItemId) async {
+  if (audioItemId.isEmpty) return null;
+  final audioItem = await ref.read(audioItemDaoProvider).getById(audioItemId);
+  return audioItem?.transcriptSource;
+}
+
+/// 按音频 ID 查询名称（同一音频 ID 的多个收藏卡片共享一次查询）。
+final audioNameByIdProvider = FutureProvider.autoDispose.family<String?, String>(
+  (ref, audioItemId) async {
+    if (audioItemId.isEmpty) return null;
+    final row = await ref.read(audioItemDaoProvider).getById(audioItemId);
+    return row?.name;
+  },
+);
 
 /// 某音频的完整句子列表（index 0..N-1 连续，`list[i-1]/list[i+1]` 即前后句）。
 ///

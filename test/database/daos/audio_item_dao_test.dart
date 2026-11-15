@@ -85,4 +85,37 @@ void main() {
 
     expect(row?.id, 'active');
   });
+
+  test('getAllActive 与 watchAllActive 跳过大字段，按需查询可读取', () async {
+    await insertDownloaded('a1');
+    await db.audioItemDao.saveTranscriptContent(
+      'a1',
+      srt: '1\n00:00:00,000 --> 00:00:01,000\nhello\n',
+      wordTimestampsJson: '[{"word":"hello"}]',
+    );
+
+    final activeList = await db.audioItemDao.getAllActive();
+    expect(activeList, hasLength(1));
+    expect(activeList.single.name, 'Audio a1');
+    expect(activeList.single.sentenceCount, 3);
+    expect(activeList.single.transcriptSrt, isNull);
+    expect(activeList.single.wordTimestampsJson, isNull);
+
+    final watchedList = await db.audioItemDao.watchAllActive().first;
+    expect(watchedList, hasLength(1));
+    expect(watchedList.single.transcriptSrt, isNull);
+    expect(watchedList.single.wordTimestampsJson, isNull);
+
+    expect(
+      await db.audioItemDao.getTranscriptSrt('a1'),
+      '1\n00:00:00,000 --> 00:00:01,000\nhello\n',
+    );
+    expect(
+      await db.audioItemDao.getWordTimestamps('a1'),
+      '[{"word":"hello"}]',
+    );
+    final detail = await db.audioItemDao.getById('a1');
+    expect(detail?.transcriptSrt, isNotNull);
+    expect(detail?.wordTimestampsJson, isNotNull);
+  });
 }

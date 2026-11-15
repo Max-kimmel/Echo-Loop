@@ -12,26 +12,101 @@ class AudioItemDao extends DatabaseAccessor<AppDatabase>
     with _$AudioItemDaoMixin {
   AudioItemDao(super.db);
 
-  /// 获取所有未删除的音频项
-  Future<List<AudioItem>> getAllActive() {
-    return (select(audioItems)
-          ..where((t) => t.deletedAt.isNull())
-          ..orderBy([
-            (t) => OrderingTerm.desc(t.isPinned),
-            (t) => OrderingTerm.desc(t.addedDate),
-          ]))
-        .get();
+  late final List<Expression<Object>> _listColumns = [
+    audioItems.id,
+    audioItems.name,
+    audioItems.audioPath,
+    audioItems.transcriptPath,
+    audioItems.addedDate,
+    audioItems.totalDuration,
+    audioItems.sentenceCount,
+    audioItems.wordCount,
+    audioItems.isPinned,
+    audioItems.transcriptSource,
+    audioItems.audioSha256,
+    audioItems.originalAudioSha256,
+    audioItems.transcriptLanguage,
+    audioItems.audioContentStatus,
+    audioItems.updatedAt,
+    audioItems.deletedAt,
+    audioItems.syncStatus,
+    audioItems.remoteAudioId,
+    audioItems.originalDate,
+    audioItems.communityUnavailableAt,
+    audioItems.difficulty,
+    audioItems.description,
+    audioItems.importSourceType,
+    audioItems.importSourceUrl,
+    audioItems.podcastEpisodeGuid,
+    audioItems.podcastEnclosureUrl,
+    audioItems.podcastEnclosureType,
+    audioItems.podcastImageUrl,
+    audioItems.podcastLink,
+    audioItems.podcastTranscriptUrl,
+    audioItems.podcastTranscriptFormat,
+  ];
+
+  AudioItem _mapListRow(TypedResult row) {
+    return AudioItem(
+      id: row.read(audioItems.id)!,
+      name: row.read(audioItems.name)!,
+      audioPath: row.read(audioItems.audioPath),
+      transcriptPath: row.read(audioItems.transcriptPath),
+      addedDate: row.read(audioItems.addedDate)!,
+      totalDuration: row.read(audioItems.totalDuration)!,
+      sentenceCount: row.read(audioItems.sentenceCount)!,
+      wordCount: row.read(audioItems.wordCount)!,
+      isPinned: row.read(audioItems.isPinned)!,
+      transcriptSource: row.read(audioItems.transcriptSource),
+      audioSha256: row.read(audioItems.audioSha256),
+      originalAudioSha256: row.read(audioItems.originalAudioSha256),
+      transcriptLanguage: row.read(audioItems.transcriptLanguage),
+      audioContentStatus: row.read(audioItems.audioContentStatus),
+      updatedAt: row.read(audioItems.updatedAt)!,
+      deletedAt: row.read(audioItems.deletedAt),
+      wordTimestampsJson: null,
+      transcriptSrt: null,
+      syncStatus: row.read(audioItems.syncStatus)!,
+      remoteAudioId: row.read(audioItems.remoteAudioId),
+      originalDate: row.read(audioItems.originalDate),
+      communityUnavailableAt: row.read(audioItems.communityUnavailableAt),
+      difficulty: row.read(audioItems.difficulty),
+      description: row.read(audioItems.description),
+      importSourceType: row.read(audioItems.importSourceType),
+      importSourceUrl: row.read(audioItems.importSourceUrl),
+      podcastEpisodeGuid: row.read(audioItems.podcastEpisodeGuid),
+      podcastEnclosureUrl: row.read(audioItems.podcastEnclosureUrl),
+      podcastEnclosureType: row.read(audioItems.podcastEnclosureType),
+      podcastImageUrl: row.read(audioItems.podcastImageUrl),
+      podcastLink: row.read(audioItems.podcastLink),
+      podcastTranscriptUrl: row.read(audioItems.podcastTranscriptUrl),
+      podcastTranscriptFormat: row.read(audioItems.podcastTranscriptFormat),
+    );
   }
 
-  /// 监听所有未删除的音频项
+  /// 获取所有未删除的音频项（仅元数据列，跳过字幕与词级时间戳大字段）
+  Future<List<AudioItem>> getAllActive() async {
+    final query = selectOnly(audioItems)
+      ..addColumns(_listColumns)
+      ..where(audioItems.deletedAt.isNull())
+      ..orderBy([
+        OrderingTerm.desc(audioItems.isPinned),
+        OrderingTerm.desc(audioItems.addedDate),
+      ]);
+    final rows = await query.get();
+    return rows.map(_mapListRow).toList();
+  }
+
+  /// 监听所有未删除的音频项（仅元数据列，跳过字幕与词级时间戳大字段）
   Stream<List<AudioItem>> watchAllActive() {
-    return (select(audioItems)
-          ..where((t) => t.deletedAt.isNull())
-          ..orderBy([
-            (t) => OrderingTerm.desc(t.isPinned),
-            (t) => OrderingTerm.desc(t.addedDate),
-          ]))
-        .watch();
+    final query = selectOnly(audioItems)
+      ..addColumns(_listColumns)
+      ..where(audioItems.deletedAt.isNull())
+      ..orderBy([
+        OrderingTerm.desc(audioItems.isPinned),
+        OrderingTerm.desc(audioItems.addedDate),
+      ]);
+    return query.watch().map((rows) => rows.map(_mapListRow).toList());
   }
 
   /// 根据 ID 获取音频项
@@ -101,14 +176,22 @@ class AudioItemDao extends DatabaseAccessor<AppDatabase>
     return hardDeleteMany({id});
   }
 
+  Future<String?> _readTextColumn(
+    String audioItemId,
+    GeneratedColumn<String> column,
+  ) async {
+    final query = selectOnly(audioItems)
+      ..addColumns([column])
+      ..where(audioItems.id.equals(audioItemId));
+    final row = await query.getSingleOrNull();
+    return row?.read(column);
+  }
+
   /// 获取指定音频的词级时间戳 JSON
   ///
   /// 独立查询，避免列表加载时读取大 JSON 字段。
-  Future<String?> getWordTimestamps(String audioItemId) async {
-    final query = select(audioItems)..where((t) => t.id.equals(audioItemId));
-    final row = await query.getSingleOrNull();
-    return row?.wordTimestampsJson;
-  }
+  Future<String?> getWordTimestamps(String audioItemId) =>
+      _readTextColumn(audioItemId, audioItems.wordTimestampsJson);
 
   /// 更新词级时间戳（独立更新，不影响其他字段）
   Future<void> updateWordTimestamps(String audioItemId, String? json) {
@@ -147,11 +230,8 @@ class AudioItemDao extends DatabaseAccessor<AppDatabase>
   /// 获取指定音频的字幕内容（完整 SRT 文本）。
   ///
   /// 独立查询，避免列表加载时读取大字段。
-  Future<String?> getTranscriptSrt(String audioItemId) async {
-    final query = select(audioItems)..where((t) => t.id.equals(audioItemId));
-    final row = await query.getSingleOrNull();
-    return row?.transcriptSrt;
-  }
+  Future<String?> getTranscriptSrt(String audioItemId) =>
+      _readTextColumn(audioItemId, audioItems.transcriptSrt);
 
   /// 更新字幕内容（独立更新，不影响其他字段）。
   Future<void> updateTranscriptSrt(String audioItemId, String? srt) {

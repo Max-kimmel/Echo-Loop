@@ -161,16 +161,35 @@ final class StudyStatisticsDao extends DatabaseAccessor<AppDatabase>
   }
 
   Future<void> _upsertWordForms(Map<String, DateTime> wordForms) async {
-    for (final entry in wordForms.entries) {
+    if (wordForms.isEmpty) return;
+
+    // 每批 200 个词形（400 个绑定变量），低于 SQLite 默认参数上限。
+    const batchSize = 200;
+    final entries = wordForms.entries.toList(growable: false);
+    for (var offset = 0; offset < entries.length; offset += batchSize) {
+      final end = offset + batchSize < entries.length
+          ? offset + batchSize
+          : entries.length;
+      final chunk = entries.sublist(offset, end);
+      final placeholders = List<String>.filled(
+        chunk.length,
+        '(?, ?)',
+      ).join(', ');
+      final variables = <Object>[
+        for (final entry in chunk) ...[
+          entry.key,
+          entry.value.millisecondsSinceEpoch ~/ 1000,
+        ],
+      ];
       await customStatement(
         '''
         INSERT INTO learned_word_forms (word_form, first_learned_at)
-        VALUES (?, ?)
+        VALUES $placeholders
         ON CONFLICT(word_form) DO UPDATE SET
           first_learned_at = MIN(learned_word_forms.first_learned_at,
                                  excluded.first_learned_at)
         ''',
-        [entry.key, entry.value.millisecondsSinceEpoch ~/ 1000],
+        variables,
       );
     }
   }

@@ -75,8 +75,10 @@ void main() {
     for (final item in items) {
       expect(item.audioPath, startsWith('audios/'));
       expect(item.transcriptPath, isNull);
-      expect(item.transcriptSrt, isNotEmpty);
-      expect(item.wordTimestampsJson, isNotEmpty);
+      expect(item.transcriptSrt, isNull);
+      expect(item.wordTimestampsJson, isNull);
+      expect(await db.audioItemDao.getTranscriptSrt(item.id), isNotEmpty);
+      expect(await db.audioItemDao.getWordTimestamps(item.id), isNotEmpty);
       expect(item.transcriptSource, 1);
       expect(item.transcriptLanguage, 'en');
       expect(await File('${tempDir.path}/${item.audioPath}').exists(), isTrue);

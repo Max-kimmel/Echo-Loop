@@ -14,9 +14,15 @@ import 'resource_install_manifest.dart';
 /// 资源自身只负责把归档解压并校验到 staging 目录，下载、校验、替换、清理
 /// 和安装清单始终走同一套实现，避免词典与发音包产生行为差异。
 class ResourceArchiveInstaller {
-  ResourceArchiveInstaller(this._downloader);
+  ResourceArchiveInstaller(
+    this._downloader, {
+    this.logTag = 'ResourceInstall',
+    this.errorPrefix = 'Resource archive',
+  });
 
   final ReliableHttpDownloader _downloader;
+  final String logTag;
+  final String errorPrefix;
 
   Future<void> install({
     required Directory root,
@@ -42,7 +48,7 @@ class ResourceArchiveInstaller {
     Directory? staging;
     try {
       AppLogger.log(
-        'ResourceInstall',
+        logTag,
         'downloading resource=$resourceId url=$uri',
       );
       await _downloader.download(
@@ -61,13 +67,13 @@ class ResourceArchiveInstaller {
         final actualSha256 = await sha256.bind(archive.openRead()).first;
         if (actualSha256.toString() != expectedSha256) {
           throw StateError(
-            'Resource archive SHA-256 mismatch: expected=$expectedSha256 '
+            '$errorPrefix SHA-256 mismatch: expected=$expectedSha256 '
             'actual=$actualSha256',
           );
         }
       }
       AppLogger.log(
-        'ResourceInstall',
+        logTag,
         'archive verified resource=$resourceId bytes=${await archive.length()}',
       );
       staging = await root.createTemp('_staging_${resourceId}_');
@@ -79,7 +85,7 @@ class ResourceArchiveInstaller {
         installAt: DateTime.now(),
       );
       AppLogger.log(
-        'ResourceInstall',
+        logTag,
         'install manifest written resource=$resourceId',
       );
 
@@ -95,7 +101,7 @@ class ResourceArchiveInstaller {
         rethrow;
       }
       if (previous.existsSync()) await previous.delete(recursive: true);
-      AppLogger.log('ResourceInstall', 'install finished resource=$resourceId');
+      AppLogger.log(logTag, 'install finished resource=$resourceId');
     } finally {
       await _deleteFileQuietly(archive);
       if (staging != null) await _deleteDirectoryQuietly(staging);
@@ -146,7 +152,7 @@ class ResourceArchiveInstaller {
       } on FileSystemException catch (error, stackTrace) {
         if (attempt == 2) {
           AppLogger.log(
-            'ResourceInstall',
+            logTag,
             'cleanup file failed path=${file.path} error=$error\n$stackTrace',
           );
           return;
@@ -165,7 +171,7 @@ class ResourceArchiveInstaller {
       } on FileSystemException catch (error, stackTrace) {
         if (attempt == 2) {
           AppLogger.log(
-            'ResourceInstall',
+            logTag,
             'cleanup directory failed path=${directory.path} '
                 'error=$error\n$stackTrace',
           );

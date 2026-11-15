@@ -8,7 +8,9 @@ import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -33,6 +35,7 @@ class WavRecorder {
     /** 每个 buffer 的回调（RMS, 帧数），在 IO 线程上调用。 */
     var onBuffer: ((Float, Int) -> Unit)? = null
 
+    private val recorderScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private var audioRecord: AudioRecord? = null
     private var recordingJob: Job? = null
     private var wavFile: RandomAccessFile? = null
@@ -124,7 +127,7 @@ class WavRecorder {
         recordingStartState = recorder.recordingState
         recordingStartElapsedMs = SystemClock.elapsedRealtime()
 
-        recordingJob = CoroutineScope(Dispatchers.IO).launch {
+        recordingJob = recorderScope.launch {
             val buffer = ShortArray(BUFFER_SIZE_FRAMES)
             while (isActive) {
                 val read = recorder.read(buffer, 0, buffer.size)
@@ -240,6 +243,7 @@ class WavRecorder {
             withTimeoutOrNull(500) { recordingJob?.cancelAndJoin() }
         }
         recordingJob = null
+        recorderScope.coroutineContext[Job]?.cancelChildren()
 
         try {
             audioRecord?.stop()
@@ -332,6 +336,7 @@ class WavRecorder {
      * 原地替换文件。全静音或时长不足 [MIN_TRIM_DURATION_MS] 则跳过。
      */
     fun trimSilence(filePath: String) {
+        var tempFile: File? = null
         try {
             val range = detectSpeechRange(filePath) ?: return
 
@@ -351,10 +356,11 @@ class WavRecorder {
             if (framesToCopy <= 0) return
 
             val sourceFile = File(filePath)
-            val tempFile = File(sourceFile.parent, "${sourceFile.nameWithoutExtension}_trimmed.wav")
+            val candidateTempFile = File(sourceFile.parent, "${sourceFile.nameWithoutExtension}_trimmed.wav")
+            tempFile = candidateTempFile
 
             RandomAccessFile(sourceFile, "r").use { src ->
-                RandomAccessFile(tempFile, "rw").use { dst ->
+                RandomAccessFile(candidateTempFile, "rw").use { dst ->
                     writeWavHeader(dst)
                     val dataBytes = framesToCopy * BYTES_PER_SAMPLE
                     src.seek((WAV_HEADER_SIZE + safeStart * BYTES_PER_SAMPLE))
@@ -377,10 +383,18 @@ class WavRecorder {
                 }
             }
 
-            // 原地替换。
-            tempFile.renameTo(sourceFile)
+            // 原地替换：renameTo 在部分 Android 文件系统上可能失败，失败时回退为覆盖拷贝。
+            if (!candidateTempFile.renameTo(sourceFile)) {
+                candidateTempFile.copyTo(sourceFile, overwrite = true)
+                candidateTempFile.delete()
+            }
         } catch (e: Exception) {
             Log.w(TAG, "trimSilence failed, keeping original file", e)
+            tempFile?.let {
+                if (it.exists()) {
+                    it.delete()
+                }
+            }
         }
     }
 

@@ -608,7 +608,8 @@ void _handleTranscribe(
       );
       final segments = _extractSpeechWithVad(vad, samples16k);
       if (segments == null) {
-        AppLogger.log(
+        _workerLog(
+          logPort,
           'ASREngine',
           'VAD: ${beforeSec.toStringAsFixed(1)}s → 0.0s (全静音)',
         );

@@ -134,12 +134,6 @@ abstract class AppLocalizations {
   /// **'Please try again later.'**
   String get playbackFailedMessage;
 
-  /// No description provided for @appTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Echo Loop'**
-  String get appTitle;
-
   /// No description provided for @premiumTitle.
   ///
   /// In en, this message translates to:
@@ -488,12 +482,6 @@ abstract class AppLocalizations {
   /// **'Purchases restored.'**
   String get premiumRestored;
 
-  /// No description provided for @premiumWebCheckoutCta.
-  ///
-  /// In en, this message translates to:
-  /// **'Continue to secure checkout'**
-  String get premiumWebCheckoutCta;
-
   /// No description provided for @premiumUseWebCheckoutFallback.
   ///
   /// In en, this message translates to:
@@ -517,12 +505,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Couldn\'t open the checkout page. Please try again.'**
   String get premiumWebOpenFailed;
-
-  /// No description provided for @premiumRefresh.
-  ///
-  /// In en, this message translates to:
-  /// **'Refresh'**
-  String get premiumRefresh;
 
   /// No description provided for @premiumRefreshStatus.
   ///
@@ -752,18 +734,6 @@ abstract class AppLocalizations {
   /// **'Add Audio'**
   String get addAudio;
 
-  /// No description provided for @noAudioYet.
-  ///
-  /// In en, this message translates to:
-  /// **'No audio files yet'**
-  String get noAudioYet;
-
-  /// No description provided for @tapToAdd.
-  ///
-  /// In en, this message translates to:
-  /// **'Tap + to add your first audio'**
-  String get tapToAdd;
-
   /// No description provided for @added.
   ///
   /// In en, this message translates to:
@@ -794,12 +764,6 @@ abstract class AppLocalizations {
   /// **'Delete Audio'**
   String get deleteAudio;
 
-  /// No description provided for @deleteConfirm.
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to delete \"{name}\"?'**
-  String deleteConfirm(String name);
-
   /// No description provided for @cancel.
   ///
   /// In en, this message translates to:
@@ -811,12 +775,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add'**
   String get add;
-
-  /// No description provided for @importAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Import'**
-  String get importAction;
 
   /// No description provided for @selectAudioFile.
   ///
@@ -830,35 +788,11 @@ abstract class AppLocalizations {
   /// **'Subtitle matched, imported together'**
   String get subtitlePairedBadge;
 
-  /// No description provided for @audioFilePickerCloudDriveHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Before selecting files from cloud storage, install and sign in to the cloud storage app first. Some apps may not support direct file selection from the file picker.'**
-  String get audioFilePickerCloudDriveHint;
-
-  /// No description provided for @selectTranscript.
-  ///
-  /// In en, this message translates to:
-  /// **'Select Subtitles (Optional)'**
-  String get selectTranscript;
-
   /// No description provided for @noTranscript.
   ///
   /// In en, this message translates to:
   /// **'No subtitles available'**
   String get noTranscript;
-
-  /// No description provided for @noBookmarked.
-  ///
-  /// In en, this message translates to:
-  /// **'No saved sentences'**
-  String get noBookmarked;
-
-  /// No description provided for @tapToBookmark.
-  ///
-  /// In en, this message translates to:
-  /// **'Tap ⭐ on sentences to bookmark them'**
-  String get tapToBookmark;
 
   /// No description provided for @playbackMode.
   ///
@@ -866,23 +800,11 @@ abstract class AppLocalizations {
   /// **'Playback Mode'**
   String get playbackMode;
 
-  /// No description provided for @fullArticle.
-  ///
-  /// In en, this message translates to:
-  /// **'Full Article'**
-  String get fullArticle;
-
   /// No description provided for @singleSentence.
   ///
   /// In en, this message translates to:
   /// **'Single Sentence'**
   String get singleSentence;
-
-  /// No description provided for @bookmarkedOnly.
-  ///
-  /// In en, this message translates to:
-  /// **'saved Only'**
-  String get bookmarkedOnly;
 
   /// No description provided for @playbackSettings.
   ///
@@ -926,12 +848,6 @@ abstract class AppLocalizations {
   /// **'Playback Speed'**
   String get playbackSpeed;
 
-  /// No description provided for @loopPlayback.
-  ///
-  /// In en, this message translates to:
-  /// **'Loop Playback'**
-  String get loopPlayback;
-
   /// No description provided for @loopCount.
   ///
   /// In en, this message translates to:
@@ -943,12 +859,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pause Interval'**
   String get pauseInterval;
-
-  /// No description provided for @applySettings.
-  ///
-  /// In en, this message translates to:
-  /// **'Apply Settings'**
-  String get applySettings;
 
   /// No description provided for @play.
   ///
@@ -1112,18 +1022,6 @@ abstract class AppLocalizations {
   /// **'Save'**
   String get save;
 
-  /// No description provided for @enableLoop.
-  ///
-  /// In en, this message translates to:
-  /// **'Enable Loop'**
-  String get enableLoop;
-
-  /// No description provided for @loopSettings.
-  ///
-  /// In en, this message translates to:
-  /// **'Loop Settings'**
-  String get loopSettings;
-
   /// No description provided for @wholeTextLoop.
   ///
   /// In en, this message translates to:
@@ -1148,41 +1046,17 @@ abstract class AppLocalizations {
   /// **'Show subtitles'**
   String get showTranscript;
 
-  /// No description provided for @shortcutKey.
-  ///
-  /// In en, this message translates to:
-  /// **'Shortcut'**
-  String get shortcutKey;
-
   /// No description provided for @seconds.
   ///
   /// In en, this message translates to:
   /// **'seconds'**
   String get seconds;
 
-  /// No description provided for @infinite.
-  ///
-  /// In en, this message translates to:
-  /// **'∞'**
-  String get infinite;
-
   /// No description provided for @singleSentenceMode.
   ///
   /// In en, this message translates to:
   /// **'Intensive Listening'**
   String get singleSentenceMode;
-
-  /// No description provided for @singleSentenceModeDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Show only current sentence'**
-  String get singleSentenceModeDesc;
-
-  /// No description provided for @autoPlayNextSentence.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto-Play Next Sentence'**
-  String get autoPlayNextSentence;
 
   /// No description provided for @repeatCount.
   ///
@@ -1231,12 +1105,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} min'**
   String sleepTimerMinutes(int count);
-
-  /// No description provided for @sleepTimerRemaining.
-  ///
-  /// In en, this message translates to:
-  /// **'Time remaining'**
-  String get sleepTimerRemaining;
 
   /// No description provided for @sleepTimerOff.
   ///
@@ -1297,18 +1165,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No bookmarked sentences remain. Switched to Full Text.'**
   String get bookmarksEmptyReturned;
-
-  /// No description provided for @removeBookmarkTip.
-  ///
-  /// In en, this message translates to:
-  /// **'Remove bookmark'**
-  String get removeBookmarkTip;
-
-  /// No description provided for @addBookmarkTip.
-  ///
-  /// In en, this message translates to:
-  /// **'Add bookmark'**
-  String get addBookmarkTip;
 
   /// No description provided for @listMode.
   ///
@@ -1418,12 +1274,6 @@ abstract class AppLocalizations {
   /// **'Enable auto-scroll'**
   String get enableAutoScroll;
 
-  /// No description provided for @disableAutoScroll.
-  ///
-  /// In en, this message translates to:
-  /// **'Disable auto-scroll'**
-  String get disableAutoScroll;
-
   /// No description provided for @audioFileNotFound.
   ///
   /// In en, this message translates to:
@@ -1525,12 +1375,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'File Already Exists'**
   String get fileExists;
-
-  /// No description provided for @fileExistsMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'An audio file named \"{name}\" already exists. Please delete the original audio first.'**
-  String fileExistsMessage(String name);
 
   /// No description provided for @back.
   ///
@@ -1760,18 +1604,6 @@ abstract class AppLocalizations {
   /// **'Unknown uploader'**
   String get communityCollectionUnknownUploader;
 
-  /// No description provided for @communityCollectionUnknownPublishDate.
-  ///
-  /// In en, this message translates to:
-  /// **'Date unknown'**
-  String get communityCollectionUnknownPublishDate;
-
-  /// No description provided for @communityCollectionCover.
-  ///
-  /// In en, this message translates to:
-  /// **'{name} cover'**
-  String communityCollectionCover(String name);
-
   /// No description provided for @communityCollectionShowMore.
   ///
   /// In en, this message translates to:
@@ -1783,18 +1615,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Less'**
   String get communityCollectionShowLess;
-
-  /// No description provided for @sortCollections.
-  ///
-  /// In en, this message translates to:
-  /// **'Sort'**
-  String get sortCollections;
-
-  /// No description provided for @gridView.
-  ///
-  /// In en, this message translates to:
-  /// **'Grid View'**
-  String get gridView;
 
   /// No description provided for @listView.
   ///
@@ -1843,12 +1663,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Permanently delete the audio(s)'**
   String get permanentlyDeleteAudio;
-
-  /// No description provided for @permanentlyDeleteAudioHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Remove the audio(s) from all collections.'**
-  String get permanentlyDeleteAudioHint;
 
   /// No description provided for @audioBelongsToCollections.
   ///
@@ -1922,30 +1736,6 @@ abstract class AppLocalizations {
   /// **'Audio Name'**
   String get audioName;
 
-  /// No description provided for @audioAlreadyInCollection.
-  ///
-  /// In en, this message translates to:
-  /// **'Duplicate Audio'**
-  String get audioAlreadyInCollection;
-
-  /// No description provided for @audioAlreadyInCollectionMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'An audio named \"{name}\" already exists in this collection.'**
-  String audioAlreadyInCollectionMessage(String name);
-
-  /// No description provided for @audioAlreadyInLibrary.
-  ///
-  /// In en, this message translates to:
-  /// **'Duplicate Audio'**
-  String get audioAlreadyInLibrary;
-
-  /// No description provided for @audioAlreadyInLibraryMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'An audio named \"{name}\" already exists in the library.'**
-  String audioAlreadyInLibraryMessage(String name);
-
   /// No description provided for @study.
   ///
   /// In en, this message translates to:
@@ -1963,18 +1753,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profile;
-
-  /// No description provided for @studyComingSoon.
-  ///
-  /// In en, this message translates to:
-  /// **'Study features coming soon'**
-  String get studyComingSoon;
-
-  /// No description provided for @favoritesComingSoon.
-  ///
-  /// In en, this message translates to:
-  /// **'Save features coming soon'**
-  String get favoritesComingSoon;
 
   /// No description provided for @firstStudy.
   ///
@@ -2120,12 +1898,6 @@ abstract class AppLocalizations {
   /// **'Unlocks in {hours} hours'**
   String reviewUnlockInHours(int hours);
 
-  /// No description provided for @reviewUnlocked.
-  ///
-  /// In en, this message translates to:
-  /// **'Unlocked'**
-  String get reviewUnlocked;
-
   /// Button on the learning plan page to immediately unlock the locked current review round
   ///
   /// In en, this message translates to:
@@ -2161,18 +1933,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ready to review'**
   String get reviewReady;
-
-  /// No description provided for @reviewCountdown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unlocked in {days} days'**
-  String reviewCountdown(int days);
-
-  /// No description provided for @reviewCountdownHours.
-  ///
-  /// In en, this message translates to:
-  /// **'Unlocked in {hours} hours'**
-  String reviewCountdownHours(int hours);
 
   /// No description provided for @blindListenBriefingTitle.
   ///
@@ -2210,12 +1970,6 @@ abstract class AppLocalizations {
   /// **'Listen without subtitles'**
   String get blindListenAppBarTitle;
 
-  /// No description provided for @blindListenPassLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Pass {count}'**
-  String blindListenPassLabel(int count);
-
   /// No description provided for @blindListenComplete.
   ///
   /// In en, this message translates to:
@@ -2228,77 +1982,17 @@ abstract class AppLocalizations {
   /// **'Listened {count} time(s)'**
   String blindListenPassInfo(int count);
 
-  /// No description provided for @selectDifficulty.
-  ///
-  /// In en, this message translates to:
-  /// **'How difficult was this?'**
-  String get selectDifficulty;
-
-  /// No description provided for @selectDifficultyRequired.
-  ///
-  /// In en, this message translates to:
-  /// **'Select a difficulty to continue'**
-  String get selectDifficultyRequired;
-
   /// No description provided for @listenAgain.
   ///
   /// In en, this message translates to:
   /// **'Listen Again'**
   String get listenAgain;
 
-  /// No description provided for @practiceAgain.
-  ///
-  /// In en, this message translates to:
-  /// **'Practice Again'**
-  String get practiceAgain;
-
   /// No description provided for @nextStage.
   ///
   /// In en, this message translates to:
   /// **'Next'**
   String get nextStage;
-
-  /// No description provided for @difficultyVeryEasy.
-  ///
-  /// In en, this message translates to:
-  /// **'Very Easy'**
-  String get difficultyVeryEasy;
-
-  /// No description provided for @difficultyEasy.
-  ///
-  /// In en, this message translates to:
-  /// **'Easy'**
-  String get difficultyEasy;
-
-  /// No description provided for @difficultyMedium.
-  ///
-  /// In en, this message translates to:
-  /// **'Medium'**
-  String get difficultyMedium;
-
-  /// No description provided for @difficultyHard.
-  ///
-  /// In en, this message translates to:
-  /// **'Hard'**
-  String get difficultyHard;
-
-  /// No description provided for @difficultyVeryHard.
-  ///
-  /// In en, this message translates to:
-  /// **'Very Hard'**
-  String get difficultyVeryHard;
-
-  /// No description provided for @countdownNextPlay.
-  ///
-  /// In en, this message translates to:
-  /// **'Next play starts in'**
-  String get countdownNextPlay;
-
-  /// No description provided for @skipCountdown.
-  ///
-  /// In en, this message translates to:
-  /// **'Skip'**
-  String get skipCountdown;
 
   /// No description provided for @audioDuration.
   ///
@@ -2366,12 +2060,6 @@ abstract class AppLocalizations {
   /// **'Audio'**
   String get audioTab;
 
-  /// No description provided for @uncategorized.
-  ///
-  /// In en, this message translates to:
-  /// **'Uncategorized'**
-  String get uncategorized;
-
   /// No description provided for @manageCollections.
   ///
   /// In en, this message translates to:
@@ -2390,23 +2078,11 @@ abstract class AppLocalizations {
   /// **'Import audio files to start practicing'**
   String get noAudioItemsHint;
 
-  /// No description provided for @audioWillBeKept.
-  ///
-  /// In en, this message translates to:
-  /// **'{count} audio files in this collection will be kept in the library'**
-  String audioWillBeKept(int count);
-
   /// No description provided for @done.
   ///
   /// In en, this message translates to:
   /// **'Done'**
   String get done;
-
-  /// No description provided for @sortAudio.
-  ///
-  /// In en, this message translates to:
-  /// **'Sort'**
-  String get sortAudio;
 
   /// No description provided for @deleteAudioConfirm.
   ///
@@ -2473,12 +2149,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sentence {current}/{total}'**
   String intensiveListenProgress(int current, int total);
-
-  /// No description provided for @intensiveListenPlayCount.
-  ///
-  /// In en, this message translates to:
-  /// **'Round {current}/{total}'**
-  String intensiveListenPlayCount(int current, int total);
 
   /// No description provided for @intensiveListenPeek.
   ///
@@ -2582,18 +2252,6 @@ abstract class AppLocalizations {
   /// **'Listen again to help it stick'**
   String get intensiveListenReplayingWithSubtitle;
 
-  /// No description provided for @intensiveListenPauseBetweenPlays.
-  ///
-  /// In en, this message translates to:
-  /// **'Next play in {seconds}s'**
-  String intensiveListenPauseBetweenPlays(int seconds);
-
-  /// No description provided for @intensiveListenPauseBetweenSentences.
-  ///
-  /// In en, this message translates to:
-  /// **'Next sentence in {seconds}s'**
-  String intensiveListenPauseBetweenSentences(int seconds);
-
   /// No description provided for @intensiveListenCompleteTitle.
   ///
   /// In en, this message translates to:
@@ -2605,12 +2263,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Keep reviewing with spaced repetition to fully master it.'**
   String get intensiveListenCompleteHint;
-
-  /// No description provided for @intensiveListenCompleteNext.
-  ///
-  /// In en, this message translates to:
-  /// **'Next Step'**
-  String get intensiveListenCompleteNext;
 
   /// No description provided for @statSentences.
   ///
@@ -2744,12 +2396,6 @@ abstract class AppLocalizations {
   /// **'Repeat as configured, tap next'**
   String get intensiveListenControlModeManualDesc;
 
-  /// No description provided for @intensiveListenPauseFixedUnit.
-  ///
-  /// In en, this message translates to:
-  /// **'{seconds}s'**
-  String intensiveListenPauseFixedUnit(int seconds);
-
   /// No description provided for @intensiveListenPauseMultiplierValue.
   ///
   /// In en, this message translates to:
@@ -2762,23 +2408,11 @@ abstract class AppLocalizations {
   /// **'Multiplier'**
   String get intensiveListenPauseMultiplierLabel;
 
-  /// No description provided for @blindListenCountdown.
-  ///
-  /// In en, this message translates to:
-  /// **'Next play in {seconds}s'**
-  String blindListenCountdown(int seconds);
-
   /// No description provided for @difficultyLabel.
   ///
   /// In en, this message translates to:
   /// **'Difficulty level: {difficulty}'**
   String difficultyLabel(String difficulty);
-
-  /// No description provided for @continueToStep.
-  ///
-  /// In en, this message translates to:
-  /// **'Continue: {step}'**
-  String continueToStep(String step);
 
   /// No description provided for @completeFirstStudy.
   ///
@@ -2858,53 +2492,11 @@ abstract class AppLocalizations {
   /// **'Sentence {current}/{total}'**
   String listenAndRepeatProgress(int current, int total);
 
-  /// No description provided for @listenAndRepeatPlayCount.
-  ///
-  /// In en, this message translates to:
-  /// **'Round {current}/{total}'**
-  String listenAndRepeatPlayCount(int current, int total);
-
-  /// No description provided for @listenAndRepeatPauseBetweenPlays.
-  ///
-  /// In en, this message translates to:
-  /// **'Repeat time {seconds}s'**
-  String listenAndRepeatPauseBetweenPlays(int seconds);
-
-  /// No description provided for @listenAndRepeatPauseBetweenSentences.
-  ///
-  /// In en, this message translates to:
-  /// **'Next sentence in {seconds}s'**
-  String listenAndRepeatPauseBetweenSentences(int seconds);
-
   /// No description provided for @listenAndRepeatListenHint.
   ///
   /// In en, this message translates to:
   /// **'Listen, then repeat'**
   String get listenAndRepeatListenHint;
-
-  /// No description provided for @listenAndRepeatYourTurnHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Repeat'**
-  String get listenAndRepeatYourTurnHint;
-
-  /// No description provided for @listenAndRepeatRecordButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Record'**
-  String get listenAndRepeatRecordButton;
-
-  /// No description provided for @listenAndRepeatStopRecordingButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Stop'**
-  String get listenAndRepeatStopRecordingButton;
-
-  /// No description provided for @listenAndRepeatPlayRecordingButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Play My Recording'**
-  String get listenAndRepeatPlayRecordingButton;
 
   /// No description provided for @listenAndRepeatRecordingInProgress.
   ///
@@ -2912,23 +2504,11 @@ abstract class AppLocalizations {
   /// **'Recording...'**
   String get listenAndRepeatRecordingInProgress;
 
-  /// No description provided for @listenAndRepeatStartSpeaking.
-  ///
-  /// In en, this message translates to:
-  /// **'Start speaking'**
-  String get listenAndRepeatStartSpeaking;
-
   /// No description provided for @listenAndRepeatAnalyzing.
   ///
   /// In en, this message translates to:
   /// **'Analyzing...'**
   String get listenAndRepeatAnalyzing;
-
-  /// No description provided for @listenAndRepeatTapToRecord.
-  ///
-  /// In en, this message translates to:
-  /// **'Tap to record'**
-  String get listenAndRepeatTapToRecord;
 
   /// No description provided for @listenAndRepeatRatingPerfect.
   ///
@@ -2959,36 +2539,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Keep going'**
   String get listenAndRepeatRatingKeepGoing;
-
-  /// No description provided for @listenAndRepeatAwaitingFinalTranscript.
-  ///
-  /// In en, this message translates to:
-  /// **'Confirming final transcription...'**
-  String get listenAndRepeatAwaitingFinalTranscript;
-
-  /// No description provided for @listenAndRepeatYourTakeLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Your transcrit'**
-  String get listenAndRepeatYourTakeLabel;
-
-  /// No description provided for @listenAndRepeatRecognitionInProgress.
-  ///
-  /// In en, this message translates to:
-  /// **'Checking your recording...'**
-  String get listenAndRepeatRecognitionInProgress;
-
-  /// No description provided for @listenAndRepeatRecognitionPassed.
-  ///
-  /// In en, this message translates to:
-  /// **'Matched {percent}% of the target words.'**
-  String listenAndRepeatRecognitionPassed(int percent);
-
-  /// No description provided for @listenAndRepeatRecognitionBelowThreshold.
-  ///
-  /// In en, this message translates to:
-  /// **'Matched {percent}% of the target words.'**
-  String listenAndRepeatRecognitionBelowThreshold(int percent);
 
   /// No description provided for @listenAndRepeatRecognitionNoEnglish.
   ///
@@ -3092,12 +2642,6 @@ abstract class AppLocalizations {
   /// **'{count} plays per sentence'**
   String listenAndRepeatBriefingPlayCount(int count);
 
-  /// No description provided for @listenAndRepeatRemoveDifficult.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto-saved, tap to undo'**
-  String get listenAndRepeatRemoveDifficult;
-
   /// No description provided for @listenAndRepeatSettings.
   ///
   /// In en, this message translates to:
@@ -3182,35 +2726,11 @@ abstract class AppLocalizations {
   /// **'Listen and retell segment by segment. Follow the original transcript or use your own words. Visible words help you recall what you heard.'**
   String get retellBriefingSubtitle;
 
-  /// No description provided for @retellBriefingTargetDuration.
-  ///
-  /// In en, this message translates to:
-  /// **'segment length'**
-  String get retellBriefingTargetDuration;
-
-  /// No description provided for @retellBriefingParagraphCount.
-  ///
-  /// In en, this message translates to:
-  /// **'Split into {count} segments'**
-  String retellBriefingParagraphCount(int count);
-
-  /// No description provided for @retellBriefingSeconds.
-  ///
-  /// In en, this message translates to:
-  /// **'{seconds}s'**
-  String retellBriefingSeconds(int seconds);
-
   /// No description provided for @retellBriefingSentenceLevel.
   ///
   /// In en, this message translates to:
   /// **'Per Sentence'**
   String get retellBriefingSentenceLevel;
-
-  /// No description provided for @retellBriefingSentenceCount.
-  ///
-  /// In en, this message translates to:
-  /// **'{count} sentences total'**
-  String retellBriefingSentenceCount(int count);
 
   /// No description provided for @retellTitle.
   ///
@@ -3247,42 +2767,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Listen closely...'**
   String get retellListeningPhase;
-
-  /// No description provided for @retellPromptToRetell.
-  ///
-  /// In en, this message translates to:
-  /// **'Retell what you heard'**
-  String get retellPromptToRetell;
-
-  /// No description provided for @retellRetellingCountdown.
-  ///
-  /// In en, this message translates to:
-  /// **'Retell {seconds}s'**
-  String retellRetellingCountdown(int seconds);
-
-  /// No description provided for @retellRepeatInfo.
-  ///
-  /// In en, this message translates to:
-  /// **'Round {current}/{total}'**
-  String retellRepeatInfo(int current, int total);
-
-  /// No description provided for @retellCompleteFirstStudy.
-  ///
-  /// In en, this message translates to:
-  /// **'First Round Complete'**
-  String get retellCompleteFirstStudy;
-
-  /// No description provided for @retellCompleteReview.
-  ///
-  /// In en, this message translates to:
-  /// **'Review Complete'**
-  String get retellCompleteReview;
-
-  /// No description provided for @retellCompleteFreePlay.
-  ///
-  /// In en, this message translates to:
-  /// **'Practice Complete'**
-  String get retellCompleteFreePlay;
 
   /// No description provided for @retellCompleteTitle.
   ///
@@ -3373,12 +2857,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Practiced {count}x'**
   String retellPassInfo(int count);
-
-  /// No description provided for @retellNoDifficultSentences.
-  ///
-  /// In en, this message translates to:
-  /// **'No sentences to retell. Listen sentence by sentence first.'**
-  String get retellNoDifficultSentences;
 
   /// No description provided for @retellKeywordMethod.
   ///
@@ -3500,12 +2978,6 @@ abstract class AppLocalizations {
   /// **'Sentence {current}/{total}'**
   String reviewDifficultPracticeProgress(int current, int total);
 
-  /// No description provided for @reviewDifficultPracticeBlindListen.
-  ///
-  /// In en, this message translates to:
-  /// **'Listening...'**
-  String get reviewDifficultPracticeBlindListen;
-
   /// No description provided for @reviewDifficultPracticeCompleteTitle.
   ///
   /// In en, this message translates to:
@@ -3524,53 +2996,17 @@ abstract class AppLocalizations {
   /// **'Exit Practice?'**
   String get exitReviewDifficultPracticeTitle;
 
-  /// No description provided for @exitReviewDifficultPracticeMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Your progress will not be saved for this step.'**
-  String get exitReviewDifficultPracticeMessage;
-
   /// No description provided for @exitReviewDifficultPracticeConfirmMessage.
   ///
   /// In en, this message translates to:
   /// **'Your progress will be saved and you can continue next time.'**
   String get exitReviewDifficultPracticeConfirmMessage;
 
-  /// No description provided for @reviewDifficultPracticeAdvancing.
-  ///
-  /// In en, this message translates to:
-  /// **'Next sentence in {seconds}s'**
-  String reviewDifficultPracticeAdvancing(int seconds);
-
-  /// No description provided for @aiSectionTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'AI'**
-  String get aiSectionTitle;
-
   /// No description provided for @speechRecognition.
   ///
   /// In en, this message translates to:
   /// **'Speech Recognition'**
   String get speechRecognition;
-
-  /// No description provided for @speechRecognitionNotConfigured.
-  ///
-  /// In en, this message translates to:
-  /// **'Not configured'**
-  String get speechRecognitionNotConfigured;
-
-  /// No description provided for @speechRecognitionEnabled.
-  ///
-  /// In en, this message translates to:
-  /// **'Enabled'**
-  String get speechRecognitionEnabled;
-
-  /// No description provided for @speechRecognitionDisabled.
-  ///
-  /// In en, this message translates to:
-  /// **'Disabled'**
-  String get speechRecognitionDisabled;
 
   /// No description provided for @speechRecognitionDescription.
   ///
@@ -3608,12 +3044,6 @@ abstract class AppLocalizations {
   /// **'Use the app\'s AI model. It works offline after downloading'**
   String get asrBackendOfflineDescription;
 
-  /// No description provided for @asrModelTier.
-  ///
-  /// In en, this message translates to:
-  /// **'Model: {tier} (auto-selected for your device)'**
-  String asrModelTier(String tier);
-
   /// No description provided for @asrModelFastDescription.
   ///
   /// In en, this message translates to:
@@ -3637,12 +3067,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Local Speech Recognition'**
   String get localSpeechRecognition;
-
-  /// No description provided for @speechModelSize.
-  ///
-  /// In en, this message translates to:
-  /// **'Model size: ~{size}'**
-  String speechModelSize(String size);
 
   /// No description provided for @speechModelApproxSize.
   ///
@@ -3722,30 +3146,6 @@ abstract class AppLocalizations {
   /// **'This will free up {size} of storage space.'**
   String deleteModelConfirmMessage(String size);
 
-  /// No description provided for @disableSpeechRecognitionTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Disable Speech Recognition?'**
-  String get disableSpeechRecognitionTitle;
-
-  /// No description provided for @disableSpeechRecognitionMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Speech scoring will be unavailable.'**
-  String get disableSpeechRecognitionMessage;
-
-  /// No description provided for @alsoDeleteModel.
-  ///
-  /// In en, this message translates to:
-  /// **'Also delete downloaded model'**
-  String get alsoDeleteModel;
-
-  /// No description provided for @disableAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Disable'**
-  String get disableAction;
-
   /// No description provided for @speechRecognitionRequiredMessage.
   ///
   /// In en, this message translates to:
@@ -3806,23 +3206,11 @@ abstract class AppLocalizations {
   /// **'Download model'**
   String get asrDownloadModel;
 
-  /// No description provided for @downloadNow.
-  ///
-  /// In en, this message translates to:
-  /// **'Download Now'**
-  String get downloadNow;
-
   /// No description provided for @later.
   ///
   /// In en, this message translates to:
   /// **'Later'**
   String get later;
-
-  /// No description provided for @speechRecognitionNotEnabled.
-  ///
-  /// In en, this message translates to:
-  /// **'Voice recognition not enabled. Enable in Settings.'**
-  String get speechRecognitionNotEnabled;
 
   /// No description provided for @retryDownload.
   ///
@@ -3943,12 +3331,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{percent}% done'**
   String localTranscriptionProgressPercent(int percent);
-
-  /// No description provided for @localTranscriptionModelRequiredTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Speech model needed'**
-  String get localTranscriptionModelRequiredTitle;
 
   /// No description provided for @localTranscriptionModelRequiredMessage.
   ///
@@ -4106,12 +3488,6 @@ abstract class AppLocalizations {
   /// **'Auto Detect'**
   String get languageAutoDetect;
 
-  /// No description provided for @mixedLanguageNotSupported.
-  ///
-  /// In en, this message translates to:
-  /// **'Mixed-language audio is not supported yet'**
-  String get mixedLanguageNotSupported;
-
   /// No description provided for @selectLanguage.
   ///
   /// In en, this message translates to:
@@ -4190,12 +3566,6 @@ abstract class AppLocalizations {
   /// **'Failed to download subtitles'**
   String get downloadSubtitleFailed;
 
-  /// No description provided for @audioContentEmptyWarning.
-  ///
-  /// In en, this message translates to:
-  /// **'Possibly empty'**
-  String get audioContentEmptyWarning;
-
   /// No description provided for @audioContentDamagedWarning.
   ///
   /// In en, this message translates to:
@@ -4256,42 +3626,6 @@ abstract class AppLocalizations {
   /// **'Not detected'**
   String get transcriptionAudioUnknown;
 
-  /// No description provided for @currentSubtitleExists.
-  ///
-  /// In en, this message translates to:
-  /// **'Current: Has Subtitle'**
-  String get currentSubtitleExists;
-
-  /// No description provided for @currentSubtitleLocal.
-  ///
-  /// In en, this message translates to:
-  /// **'Current: Local Upload'**
-  String get currentSubtitleLocal;
-
-  /// No description provided for @currentSubtitleAi.
-  ///
-  /// In en, this message translates to:
-  /// **'Current: AI ({language})'**
-  String currentSubtitleAi(String language);
-
-  /// No description provided for @noSubtitleYet.
-  ///
-  /// In en, this message translates to:
-  /// **'No subtitle yet'**
-  String get noSubtitleYet;
-
-  /// No description provided for @addSubtitlePromptTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Add Subtitle?'**
-  String get addSubtitlePromptTitle;
-
-  /// No description provided for @addSubtitlePromptMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Add a subtitle now for learning?'**
-  String get addSubtitlePromptMessage;
-
   /// No description provided for @selectCollection.
   ///
   /// In en, this message translates to:
@@ -4316,18 +3650,6 @@ abstract class AppLocalizations {
   /// **'Retry'**
   String get retryTranscription;
 
-  /// No description provided for @transcriptionFailedMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Error: {message}'**
-  String transcriptionFailedMessage(String message);
-
-  /// Today's study time label
-  ///
-  /// In en, this message translates to:
-  /// **'Today: {time}'**
-  String todayStudyTime(String time);
-
   /// Study time in minutes
   ///
   /// In en, this message translates to:
@@ -4345,12 +3667,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Study Tasks'**
   String get studyTasks;
-
-  /// No description provided for @continueLearningHero.
-  ///
-  /// In en, this message translates to:
-  /// **'Continue Learning'**
-  String get continueLearningHero;
 
   /// No description provided for @startButton.
   ///
@@ -4526,24 +3842,6 @@ abstract class AppLocalizations {
   /// **'{count} sentences'**
   String favoritesBookmarkCount(int count);
 
-  /// No description provided for @favoritesVocabularySaved.
-  ///
-  /// In en, this message translates to:
-  /// **'Saved'**
-  String get favoritesVocabularySaved;
-
-  /// No description provided for @favoritesVocabularyRemoved.
-  ///
-  /// In en, this message translates to:
-  /// **'Removed'**
-  String get favoritesVocabularyRemoved;
-
-  /// No description provided for @favoritesBookmarkRemoved.
-  ///
-  /// In en, this message translates to:
-  /// **'Bookmark removed'**
-  String get favoritesBookmarkRemoved;
-
   /// No description provided for @undo.
   ///
   /// In en, this message translates to:
@@ -4574,12 +3872,6 @@ abstract class AppLocalizations {
   /// **'Start Review'**
   String get bookmarkReviewStart;
 
-  /// No description provided for @bookmarkReviewStartCount.
-  ///
-  /// In en, this message translates to:
-  /// **'Start Review ({count})'**
-  String bookmarkReviewStartCount(int count);
-
   /// No description provided for @bookmarkReviewDueCount.
   ///
   /// In en, this message translates to:
@@ -4609,12 +3901,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Review Complete'**
   String get bookmarkReviewComplete;
-
-  /// No description provided for @bookmarkReviewAgain.
-  ///
-  /// In en, this message translates to:
-  /// **'Review Again'**
-  String get bookmarkReviewAgain;
 
   /// No description provided for @bookmarkReviewAudioSkipped.
   ///
@@ -4700,18 +3986,6 @@ abstract class AppLocalizations {
   /// **'Couldn\'t unsave this sentence. Please try again.'**
   String get bookmarkReviewUnsaveFailed;
 
-  /// No description provided for @bookmarkReviewSettingsPlaceholderTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Review settings'**
-  String get bookmarkReviewSettingsPlaceholderTitle;
-
-  /// No description provided for @bookmarkReviewSettingsPlaceholderBody.
-  ///
-  /// In en, this message translates to:
-  /// **'More review controls will be available in a future update.'**
-  String get bookmarkReviewSettingsPlaceholderBody;
-
   /// No description provided for @bookmarkReviewSettingsTitle.
   ///
   /// In en, this message translates to:
@@ -4742,12 +4016,6 @@ abstract class AppLocalizations {
   /// **'Show vocabulary on front'**
   String get favoriteReviewShowVocabularyOnFront;
 
-  /// No description provided for @bookmarkReviewDailyGoal.
-  ///
-  /// In en, this message translates to:
-  /// **'Daily review goal'**
-  String get bookmarkReviewDailyGoal;
-
   /// No description provided for @favoriteReviewSentenceSettings.
   ///
   /// In en, this message translates to:
@@ -4759,24 +4027,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Saved vocabulary review'**
   String get favoriteReviewVocabularySettings;
-
-  /// No description provided for @favoriteReviewSentenceDailyGoal.
-  ///
-  /// In en, this message translates to:
-  /// **'Daily sentence review goal'**
-  String get favoriteReviewSentenceDailyGoal;
-
-  /// No description provided for @favoriteReviewVocabularyDailyGoal.
-  ///
-  /// In en, this message translates to:
-  /// **'Daily vocabulary review goal'**
-  String get favoriteReviewVocabularyDailyGoal;
-
-  /// No description provided for @bookmarkReviewUnlimited.
-  ///
-  /// In en, this message translates to:
-  /// **'Unlimited'**
-  String get bookmarkReviewUnlimited;
 
   /// No description provided for @bookmarkReviewOrder.
   ///
@@ -4868,12 +4118,6 @@ abstract class AppLocalizations {
   /// **'Tap to reveal the back'**
   String get favoriteVocabularyReviewRevealHint;
 
-  /// No description provided for @favoriteVocabularyReviewBackPlaceholder.
-  ///
-  /// In en, this message translates to:
-  /// **'Back side is coming soon'**
-  String get favoriteVocabularyReviewBackPlaceholder;
-
   /// No description provided for @bookmarkReviewRatingEasy.
   ///
   /// In en, this message translates to:
@@ -4904,41 +4148,11 @@ abstract class AppLocalizations {
   /// **'Times to Listen and Repeat'**
   String get difficultPracticeShadowReadingRepeat;
 
-  /// No description provided for @inputWordsShort.
-  ///
-  /// In en, this message translates to:
-  /// **'Input'**
-  String get inputWordsShort;
-
-  /// No description provided for @outputWordsShort.
-  ///
-  /// In en, this message translates to:
-  /// **'Output'**
-  String get outputWordsShort;
-
-  /// No description provided for @listenTimeWords.
-  ///
-  /// In en, this message translates to:
-  /// **'Listen: {time} · {words}'**
-  String listenTimeWords(String time, String words);
-
-  /// No description provided for @speakTimeWords.
-  ///
-  /// In en, this message translates to:
-  /// **'Speak: {time} · {words}'**
-  String speakTimeWords(String time, String words);
-
   /// No description provided for @learnedWordFormsShort.
   ///
   /// In en, this message translates to:
   /// **'Vocab'**
   String get learnedWordFormsShort;
-
-  /// No description provided for @todayNewShort.
-  ///
-  /// In en, this message translates to:
-  /// **'Today'**
-  String get todayNewShort;
 
   /// No description provided for @learnedWordsEmptyHint.
   ///
@@ -4958,161 +4172,11 @@ abstract class AppLocalizations {
   /// **'Recently Learned'**
   String get learnedWordsSortTimeDesc;
 
-  /// No description provided for @bookmarkReviewProgress.
-  ///
-  /// In en, this message translates to:
-  /// **'Sentence {current}/{total}'**
-  String bookmarkReviewProgress(int current, int total);
-
-  /// No description provided for @flashcardTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Flashcards'**
-  String get flashcardTitle;
-
-  /// No description provided for @flashcardViewAnswer.
-  ///
-  /// In en, this message translates to:
-  /// **'Ready? View answer'**
-  String get flashcardViewAnswer;
-
-  /// No description provided for @flashcardTapToFlip.
-  ///
-  /// In en, this message translates to:
-  /// **'Tap to flip back'**
-  String get flashcardTapToFlip;
-
-  /// No description provided for @flashcardUnsaveHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Unmark when mastered'**
-  String get flashcardUnsaveHint;
-
-  /// No description provided for @flashcardProgress.
-  ///
-  /// In en, this message translates to:
-  /// **'{current}/{total}'**
-  String flashcardProgress(int current, int total);
-
   /// No description provided for @flashcardComplete.
   ///
   /// In en, this message translates to:
   /// **'Review Complete'**
   String get flashcardComplete;
-
-  /// No description provided for @flashcardWordsReviewed.
-  ///
-  /// In en, this message translates to:
-  /// **'Reviewed {count} words'**
-  String flashcardWordsReviewed(int count);
-
-  /// No description provided for @flashcardWordsRemoved.
-  ///
-  /// In en, this message translates to:
-  /// **'Unsaved {count} words'**
-  String flashcardWordsRemoved(int count);
-
-  /// No description provided for @flashcardPracticeAgain.
-  ///
-  /// In en, this message translates to:
-  /// **'Practice Again'**
-  String get flashcardPracticeAgain;
-
-  /// No description provided for @flashcardFinish.
-  ///
-  /// In en, this message translates to:
-  /// **'Done'**
-  String get flashcardFinish;
-
-  /// No description provided for @flashcardSettingsTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Flashcard Settings'**
-  String get flashcardSettingsTitle;
-
-  /// No description provided for @flashcardSettingsSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Settings are saved automatically'**
-  String get flashcardSettingsSubtitle;
-
-  /// No description provided for @flashcardControlModeLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Control Mode'**
-  String get flashcardControlModeLabel;
-
-  /// No description provided for @flashcardControlModeAuto.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto'**
-  String get flashcardControlModeAuto;
-
-  /// No description provided for @flashcardControlModeManual.
-  ///
-  /// In en, this message translates to:
-  /// **'Manual'**
-  String get flashcardControlModeManual;
-
-  /// No description provided for @flashcardControlModeAutoDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto flip, auto advance'**
-  String get flashcardControlModeAutoDesc;
-
-  /// No description provided for @flashcardControlModeManualDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Manual flip, manual advance'**
-  String get flashcardControlModeManualDesc;
-
-  /// No description provided for @flashcardTimerMode.
-  ///
-  /// In en, this message translates to:
-  /// **'Flashcard Advance Timer'**
-  String get flashcardTimerMode;
-
-  /// No description provided for @flashcardTimerSmart.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto'**
-  String get flashcardTimerSmart;
-
-  /// No description provided for @flashcardTimerSmartDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Adjust based on word difficulty and practice count'**
-  String get flashcardTimerSmartDesc;
-
-  /// No description provided for @flashcardTimerFixed.
-  ///
-  /// In en, this message translates to:
-  /// **'Fixed'**
-  String get flashcardTimerFixed;
-
-  /// No description provided for @flashcardTimerFixedDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Set fixed duration for front and back'**
-  String get flashcardTimerFixedDesc;
-
-  /// No description provided for @flashcardTimerFrontDuration.
-  ///
-  /// In en, this message translates to:
-  /// **'Front'**
-  String get flashcardTimerFrontDuration;
-
-  /// No description provided for @flashcardTimerBackDuration.
-  ///
-  /// In en, this message translates to:
-  /// **'Back'**
-  String get flashcardTimerBackDuration;
-
-  /// No description provided for @flashcardSortMode.
-  ///
-  /// In en, this message translates to:
-  /// **'Word List Order'**
-  String get flashcardSortMode;
 
   /// No description provided for @flashcardSortAlphaAsc.
   ///
@@ -5126,131 +4190,11 @@ abstract class AppLocalizations {
   /// **'Z → A'**
   String get flashcardSortAlphaDesc;
 
-  /// No description provided for @flashcardSortTimeAsc.
-  ///
-  /// In en, this message translates to:
-  /// **'Oldest'**
-  String get flashcardSortTimeAsc;
-
-  /// No description provided for @flashcardSortTimeDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Newest'**
-  String get flashcardSortTimeDesc;
-
-  /// No description provided for @flashcardSortRandom.
-  ///
-  /// In en, this message translates to:
-  /// **'Random'**
-  String get flashcardSortRandom;
-
-  /// No description provided for @flashcardSortSmart.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto'**
-  String get flashcardSortSmart;
-
-  /// No description provided for @flashcardSortSmartDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Order based on memory patterns'**
-  String get flashcardSortSmartDesc;
-
-  /// No description provided for @flashcardSortRandomDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Shuffle randomly each time'**
-  String get flashcardSortRandomDesc;
-
-  /// No description provided for @flashcardSortAlphaAscDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Sort A to Z'**
-  String get flashcardSortAlphaAscDesc;
-
-  /// No description provided for @flashcardSortAlphaDescDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Sort Z to A'**
-  String get flashcardSortAlphaDescDesc;
-
-  /// No description provided for @flashcardSortTimeAscDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Oldest saved first'**
-  String get flashcardSortTimeAscDesc;
-
-  /// No description provided for @flashcardSortTimeDescDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Newest saved first'**
-  String get flashcardSortTimeDescDesc;
-
-  /// No description provided for @flashcardNoDefinition.
-  ///
-  /// In en, this message translates to:
-  /// **'No definition'**
-  String get flashcardNoDefinition;
-
-  /// No description provided for @flashcardStartQuiz.
-  ///
-  /// In en, this message translates to:
-  /// **'Start Review'**
-  String get flashcardStartQuiz;
-
-  /// No description provided for @flashcardTts.
-  ///
-  /// In en, this message translates to:
-  /// **'Pronounce'**
-  String get flashcardTts;
-
-  /// No description provided for @flashcardAutoPlaySentence.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto-play Sentence'**
-  String get flashcardAutoPlaySentence;
-
-  /// No description provided for @flashcardAutoPlayWord.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto-play Word'**
-  String get flashcardAutoPlayWord;
-
   /// No description provided for @freePlay.
   ///
   /// In en, this message translates to:
   /// **'Listen Your Way'**
   String get freePlay;
-
-  /// No description provided for @wordAiAnalysis.
-  ///
-  /// In en, this message translates to:
-  /// **'AI Analysis'**
-  String get wordAiAnalysis;
-
-  /// No description provided for @wordAiContextMeaning.
-  ///
-  /// In en, this message translates to:
-  /// **'Contextual Meaning'**
-  String get wordAiContextMeaning;
-
-  /// No description provided for @wordAiCollocations.
-  ///
-  /// In en, this message translates to:
-  /// **'Collocations'**
-  String get wordAiCollocations;
-
-  /// No description provided for @wordAiUsage.
-  ///
-  /// In en, this message translates to:
-  /// **'Usage Notes'**
-  String get wordAiUsage;
-
-  /// No description provided for @wordAiWordFamily.
-  ///
-  /// In en, this message translates to:
-  /// **'Word Family'**
-  String get wordAiWordFamily;
 
   /// No description provided for @storage.
   ///
@@ -5324,12 +4268,6 @@ abstract class AppLocalizations {
   /// **'Rate Us'**
   String get rateUs;
 
-  /// No description provided for @joinCommunity.
-  ///
-  /// In en, this message translates to:
-  /// **'Join Community'**
-  String get joinCommunity;
-
   /// No description provided for @aboutCommunity.
   ///
   /// In en, this message translates to:
@@ -5341,12 +4279,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Learn, ask, and share'**
   String get joinCommunityInviteSubtitle;
-
-  /// No description provided for @networkError.
-  ///
-  /// In en, this message translates to:
-  /// **'Unable to connect. Please check your network and try again.'**
-  String get networkError;
 
   /// No description provided for @viewSourceCode.
   ///
@@ -5426,12 +4358,6 @@ abstract class AppLocalizations {
   /// **'Demo Mode'**
   String get demoMode;
 
-  /// No description provided for @demoModeSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Use demo data for screenshots'**
-  String get demoModeSubtitle;
-
   /// No description provided for @practiceRemoveMark.
   ///
   /// In en, this message translates to:
@@ -5444,18 +4370,6 @@ abstract class AppLocalizations {
   /// **'Re-mark'**
   String get practiceAddMark;
 
-  /// No description provided for @blindListenSegmentProgress.
-  ///
-  /// In en, this message translates to:
-  /// **'Segment {current}/{total}'**
-  String blindListenSegmentProgress(int current, int total);
-
-  /// No description provided for @blindListenSegmentDuration.
-  ///
-  /// In en, this message translates to:
-  /// **'{duration}s'**
-  String blindListenSegmentDuration(int duration);
-
   /// No description provided for @blindListenListeningHint.
   ///
   /// In en, this message translates to:
@@ -5467,12 +4381,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Listen first, then recall'**
   String get blindListenPreListenHint;
-
-  /// No description provided for @blindListenRepeatInfo.
-  ///
-  /// In en, this message translates to:
-  /// **'Round {current}/{total}'**
-  String blindListenRepeatInfo(int current, int total);
 
   /// No description provided for @blindListenSettingsTitle.
   ///
@@ -5497,12 +4405,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hide Subtitles'**
   String get blindListenDisplayHideAll;
-
-  /// No description provided for @blindListenDisplayShowAll.
-  ///
-  /// In en, this message translates to:
-  /// **'Show Subtitles'**
-  String get blindListenDisplayShowAll;
 
   /// No description provided for @blindListenRecallHint.
   ///
@@ -5654,36 +4556,6 @@ abstract class AppLocalizations {
   /// **'Listening builds over time. Review your saved sentences'**
   String get reviewReminderSavedBody10;
 
-  /// No description provided for @stageBlindListen.
-  ///
-  /// In en, this message translates to:
-  /// **'Listen without subtitles'**
-  String get stageBlindListen;
-
-  /// No description provided for @stageIntensiveListen.
-  ///
-  /// In en, this message translates to:
-  /// **'Listen sentence by sentence'**
-  String get stageIntensiveListen;
-
-  /// No description provided for @stageListenAndRepeat.
-  ///
-  /// In en, this message translates to:
-  /// **'Listen & Repeat'**
-  String get stageListenAndRepeat;
-
-  /// No description provided for @stageRetell.
-  ///
-  /// In en, this message translates to:
-  /// **'Listen & Retell'**
-  String get stageRetell;
-
-  /// No description provided for @stageReviewDifficultPractice.
-  ///
-  /// In en, this message translates to:
-  /// **'Practice saved sentences'**
-  String get stageReviewDifficultPractice;
-
   /// No description provided for @stageBookmarkReview.
   ///
   /// In en, this message translates to:
@@ -5695,18 +4567,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Vocabulary Review'**
   String get stageFlashcard;
-
-  /// No description provided for @stageBreakdownTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'{date}'**
-  String stageBreakdownTitle(String date);
-
-  /// No description provided for @stageBreakdownToday.
-  ///
-  /// In en, this message translates to:
-  /// **' (Today)'**
-  String get stageBreakdownToday;
 
   /// No description provided for @stageBreakdownTotal.
   ///
@@ -5773,12 +4633,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Thinking, pauses, etc.'**
   String get chartLegendOtherHint;
-
-  /// No description provided for @reminderSectionTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Reminders'**
-  String get reminderSectionTitle;
 
   /// No description provided for @reminderSettings.
   ///
@@ -5978,12 +4832,6 @@ abstract class AppLocalizations {
   /// **'Export PDF'**
   String get exportPdf;
 
-  /// No description provided for @pdfExporting.
-  ///
-  /// In en, this message translates to:
-  /// **'Generating PDF…'**
-  String get pdfExporting;
-
   /// No description provided for @pdfExportFailed.
   ///
   /// In en, this message translates to:
@@ -6068,30 +4916,6 @@ abstract class AppLocalizations {
   /// **'Export Data'**
   String get exportData;
 
-  /// No description provided for @exportDataSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Export all data to a ZIP file'**
-  String get exportDataSubtitle;
-
-  /// No description provided for @importData.
-  ///
-  /// In en, this message translates to:
-  /// **'Import Data'**
-  String get importData;
-
-  /// No description provided for @importDataSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Restore data from a backup file'**
-  String get importDataSubtitle;
-
-  /// No description provided for @exporting.
-  ///
-  /// In en, this message translates to:
-  /// **'Exporting...'**
-  String get exporting;
-
   /// No description provided for @importing.
   ///
   /// In en, this message translates to:
@@ -6115,18 +4939,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Import complete'**
   String get importSuccess;
-
-  /// No description provided for @importConfirmTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Confirm Import'**
-  String get importConfirmTitle;
-
-  /// No description provided for @importConfirmMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'This will replace all current data, including learning progress, saved items, and audio files. This action cannot be undone.'**
-  String get importConfirmMessage;
 
   /// No description provided for @backupTime.
   ///
@@ -6218,35 +5030,17 @@ abstract class AppLocalizations {
   /// **'Backup & Restore'**
   String get backupAndRestore;
 
-  /// No description provided for @backupAndRestoreSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Restore your learning data after reinstalling or changing devices'**
-  String get backupAndRestoreSubtitle;
-
   /// No description provided for @backupData.
   ///
   /// In en, this message translates to:
   /// **'Back Up'**
   String get backupData;
 
-  /// No description provided for @backupDataSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Back up learning data, media, and offline dictionaries'**
-  String get backupDataSubtitle;
-
   /// No description provided for @restoreData.
   ///
   /// In en, this message translates to:
   /// **'Restore'**
   String get restoreData;
-
-  /// No description provided for @restoreDataSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Restore all data from a local backup file'**
-  String get restoreDataSubtitle;
 
   /// No description provided for @backupReadyTitle.
   ///
@@ -6307,12 +5101,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Activity Calendar'**
   String get activityCalendar;
-
-  /// No description provided for @noActivityThisMonth.
-  ///
-  /// In en, this message translates to:
-  /// **'No learning activity this month'**
-  String get noActivityThisMonth;
 
   /// No description provided for @studyDurationNoRecords.
   ///
@@ -6386,36 +5174,6 @@ abstract class AppLocalizations {
   /// **'Best streak'**
   String get monthlyBestStreak;
 
-  /// No description provided for @senseGroupSplit.
-  ///
-  /// In en, this message translates to:
-  /// **'Split into Sense Groups'**
-  String get senseGroupSplit;
-
-  /// No description provided for @senseGroupLoading.
-  ///
-  /// In en, this message translates to:
-  /// **'Splitting...'**
-  String get senseGroupLoading;
-
-  /// No description provided for @senseGroupSingleGroup.
-  ///
-  /// In en, this message translates to:
-  /// **'This sentence is a single sense group'**
-  String get senseGroupSingleGroup;
-
-  /// No description provided for @senseGroupSave.
-  ///
-  /// In en, this message translates to:
-  /// **'Save'**
-  String get senseGroupSave;
-
-  /// No description provided for @senseGroupSaved.
-  ///
-  /// In en, this message translates to:
-  /// **'Saved'**
-  String get senseGroupSaved;
-
   /// No description provided for @annotationBtnSenseGroup.
   ///
   /// In en, this message translates to:
@@ -6488,18 +5246,6 @@ abstract class AppLocalizations {
   /// **'AI transcription uses the cloud transcription service. Sign in to transcribe audio with AI.'**
   String get transcriptionSignInRequiredMessage;
 
-  /// No description provided for @senseGroupNotAvailable.
-  ///
-  /// In en, this message translates to:
-  /// **'Sense group playback is not available for this audio yet'**
-  String get senseGroupNotAvailable;
-
-  /// No description provided for @wordTimestampsNotFound.
-  ///
-  /// In en, this message translates to:
-  /// **'Word-level timestamps not found. Please restart the app to retry.'**
-  String get wordTimestampsNotFound;
-
   /// No description provided for @recycleBinTitle.
   ///
   /// In en, this message translates to:
@@ -6536,12 +5282,6 @@ abstract class AppLocalizations {
   /// **'Today at a glance'**
   String get reviewStatisticsTodayOverview;
 
-  /// No description provided for @reviewStatisticsTodayReviewed.
-  ///
-  /// In en, this message translates to:
-  /// **'Reviewed today'**
-  String get reviewStatisticsTodayReviewed;
-
   /// No description provided for @reviewStatisticsTodayCompleted.
   ///
   /// In en, this message translates to:
@@ -6566,23 +5306,11 @@ abstract class AppLocalizations {
   /// **'Review time'**
   String get reviewStatisticsDuration;
 
-  /// No description provided for @reviewStatisticsDue.
-  ///
-  /// In en, this message translates to:
-  /// **'Ready now'**
-  String get reviewStatisticsDue;
-
   /// No description provided for @reviewStatisticsCurrentDue.
   ///
   /// In en, this message translates to:
   /// **'{count} ready to review'**
   String reviewStatisticsCurrentDue(String count);
-
-  /// No description provided for @reviewStatisticsCurrentDueExplanation.
-  ///
-  /// In en, this message translates to:
-  /// **'Already due and ready to start'**
-  String get reviewStatisticsCurrentDueExplanation;
 
   /// No description provided for @reviewStatisticsCurrentDueBreakdown.
   ///
@@ -6722,18 +5450,6 @@ abstract class AppLocalizations {
   /// **'Permanently delete all {count} items? This cannot be undone.'**
   String recycleBinClearAllConfirm(int count);
 
-  /// No description provided for @recycleBinRestore.
-  ///
-  /// In en, this message translates to:
-  /// **'Restore'**
-  String get recycleBinRestore;
-
-  /// No description provided for @recycleBinDelete.
-  ///
-  /// In en, this message translates to:
-  /// **'Delete'**
-  String get recycleBinDelete;
-
   /// No description provided for @recycleBinSortTimeDesc.
   ///
   /// In en, this message translates to:
@@ -6758,23 +5474,11 @@ abstract class AppLocalizations {
   /// **'{count} files selected'**
   String filesSelected(int count);
 
-  /// No description provided for @processingFileOf.
-  ///
-  /// In en, this message translates to:
-  /// **'Processing {current} of {total}...'**
-  String processingFileOf(int current, int total);
-
   /// No description provided for @importingFileProgress.
   ///
   /// In en, this message translates to:
   /// **'Importing {current}/{total}: {name}'**
   String importingFileProgress(int current, int total, String name);
-
-  /// No description provided for @multipleAudioAdded.
-  ///
-  /// In en, this message translates to:
-  /// **'{count} items added'**
-  String multipleAudioAdded(int count);
 
   /// No description provided for @audioImportedCount.
   ///
@@ -6823,12 +5527,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Remove'**
   String get removeFile;
-
-  /// No description provided for @goToSettings.
-  ///
-  /// In en, this message translates to:
-  /// **'Go to Settings'**
-  String get goToSettings;
 
   /// No description provided for @dictionaryLookupFailed.
   ///
@@ -7052,12 +5750,6 @@ abstract class AppLocalizations {
   /// **'Reset New User Guide'**
   String get resetNewUserGuide;
 
-  /// No description provided for @resetNewUserGuideSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Clear all guide seen states for testing'**
-  String get resetNewUserGuideSubtitle;
-
   /// No description provided for @resetNewUserGuideDone.
   ///
   /// In en, this message translates to:
@@ -7106,18 +5798,6 @@ abstract class AppLocalizations {
   /// **'Apple Podcasts'**
   String get discoverPodcastEntryTitle;
 
-  /// No description provided for @discoverPodcastEntrySubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'{count} podcasts. Subscribe to keep new episodes in your library.'**
-  String discoverPodcastEntrySubtitle(int count);
-
-  /// No description provided for @discoverPodcastTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Curated Podcasts'**
-  String get discoverPodcastTitle;
-
   /// No description provided for @discoverPodcastEmpty.
   ///
   /// In en, this message translates to:
@@ -7135,18 +5815,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to add. Some RSS feeds or Apple Podcasts may be unavailable on the current network. Try again later or switch networks.'**
   String get podcastPreviewSubscribeFailed;
-
-  /// No description provided for @podcastEnrollNeededTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Add Podcast First'**
-  String get podcastEnrollNeededTitle;
-
-  /// No description provided for @podcastEnrollNeededMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Add this podcast to My Collections, then you can download and learn this episode.'**
-  String get podcastEnrollNeededMessage;
 
   /// No description provided for @podcastPreviewNetworkFailed.
   ///
@@ -7238,18 +5906,6 @@ abstract class AppLocalizations {
   /// **'Remove from My Collections'**
   String get removeFromMyCollections;
 
-  /// No description provided for @enrollNeededTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Add Collection First'**
-  String get enrollNeededTitle;
-
-  /// No description provided for @enrollNeededMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Add this collection to My Collection, then you can start practicing.'**
-  String get enrollNeededMessage;
-
   /// No description provided for @enrollSucceeded.
   ///
   /// In en, this message translates to:
@@ -7309,18 +5965,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel Download'**
   String get downloadCancel;
-
-  /// No description provided for @downloadLater.
-  ///
-  /// In en, this message translates to:
-  /// **'Later'**
-  String get downloadLater;
-
-  /// No description provided for @downloadCompleted.
-  ///
-  /// In en, this message translates to:
-  /// **'{name} downloaded'**
-  String downloadCompleted(String name);
 
   /// No description provided for @downloadFailed.
   ///
@@ -7382,30 +6026,6 @@ abstract class AppLocalizations {
   /// **'Download failed'**
   String get backgroundDownloadFailedTitle;
 
-  /// No description provided for @audioListColumnName.
-  ///
-  /// In en, this message translates to:
-  /// **'Name'**
-  String get audioListColumnName;
-
-  /// No description provided for @audioListColumnDuration.
-  ///
-  /// In en, this message translates to:
-  /// **'Duration'**
-  String get audioListColumnDuration;
-
-  /// No description provided for @onboardingTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'A few quick questions'**
-  String get onboardingTitle;
-
-  /// No description provided for @onboardingSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Takes 10 seconds to tailor your practice'**
-  String get onboardingSubtitle;
-
   /// No description provided for @onboardingBack.
   ///
   /// In en, this message translates to:
@@ -7459,36 +6079,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Other'**
   String get onboardingExamOther;
-
-  /// No description provided for @onboardingProgress.
-  ///
-  /// In en, this message translates to:
-  /// **'{current} of {total}'**
-  String onboardingProgress(int current, int total);
-
-  /// No description provided for @onboardingNext.
-  ///
-  /// In en, this message translates to:
-  /// **'Next'**
-  String get onboardingNext;
-
-  /// No description provided for @onboardingDone.
-  ///
-  /// In en, this message translates to:
-  /// **'Done'**
-  String get onboardingDone;
-
-  /// No description provided for @onboardingFinishedTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'All set'**
-  String get onboardingFinishedTitle;
-
-  /// No description provided for @onboardingFinishedHint.
-  ///
-  /// In en, this message translates to:
-  /// **'We\'ll tailor practice to your goals and pace.'**
-  String get onboardingFinishedHint;
 
   /// No description provided for @onboardingSummaryEyebrow.
   ///
@@ -7724,12 +6314,6 @@ abstract class AppLocalizations {
   /// **'Speech recognition'**
   String get onboardingPermissionsSpeech;
 
-  /// No description provided for @playbackSection.
-  ///
-  /// In en, this message translates to:
-  /// **'Playback'**
-  String get playbackSection;
-
   /// No description provided for @learningSection.
   ///
   /// In en, this message translates to:
@@ -7886,12 +6470,6 @@ abstract class AppLocalizations {
   /// **'The Study page will stop showing the weekly study chart. To bring it back, turn it on again in Profile › Display Settings.'**
   String get hideWeeklyChartMessage;
 
-  /// No description provided for @speakingPracticeSection.
-  ///
-  /// In en, this message translates to:
-  /// **'Speaking practice'**
-  String get speakingPracticeSection;
-
   /// No description provided for @autoSkipRetellToggle.
   ///
   /// In en, this message translates to:
@@ -7903,18 +6481,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Auto-skip retelling tasks in your learning plan'**
   String get autoSkipRetellSubtitle;
-
-  /// No description provided for @autoExpandCachedAnnotationToggle.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto-expand Sentence Analysis'**
-  String get autoExpandCachedAnnotationToggle;
-
-  /// No description provided for @autoExpandCachedAnnotationSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto-show cached translation, analysis and sense groups'**
-  String get autoExpandCachedAnnotationSubtitle;
 
   /// No description provided for @autoShowAiExplanationToggle.
   ///
@@ -8192,12 +6758,6 @@ abstract class AppLocalizations {
   /// **'Sign in to Echo Loop'**
   String get authSignInTitle;
 
-  /// No description provided for @authChooseMethod.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose how you\'d like to continue.'**
-  String get authChooseMethod;
-
   /// No description provided for @authContinueWithEmail.
   ///
   /// In en, this message translates to:
@@ -8216,12 +6776,6 @@ abstract class AppLocalizations {
   /// **'Continue with Google'**
   String get authContinueWithGoogle;
 
-  /// No description provided for @authProviderComingSoon.
-  ///
-  /// In en, this message translates to:
-  /// **'Coming soon'**
-  String get authProviderComingSoon;
-
   /// No description provided for @authGoogleUnavailable.
   ///
   /// In en, this message translates to:
@@ -8233,24 +6787,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Google services are outdated. Please update and try again.'**
   String get authGoogleServicesOutdated;
-
-  /// No description provided for @authPasswordlessHint.
-  ///
-  /// In en, this message translates to:
-  /// **'No password needed. We will email you a one-time code.'**
-  String get authPasswordlessHint;
-
-  /// No description provided for @authEmailTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Email sign in'**
-  String get authEmailTitle;
-
-  /// No description provided for @authEmailOtpTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Continue with email'**
-  String get authEmailOtpTitle;
 
   /// No description provided for @authEmailOtpDescription.
   ///
@@ -8293,12 +6829,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Verification code is incorrect or expired.'**
   String get authOtpIncorrectOrExpired;
-
-  /// No description provided for @authEnterOtpTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter code'**
-  String get authEnterOtpTitle;
 
   /// No description provided for @authOtpHelpText.
   ///
@@ -8354,12 +6884,6 @@ abstract class AppLocalizations {
   /// **'Password'**
   String get authPasswordLabel;
 
-  /// No description provided for @authConfirmPasswordLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Confirm Password'**
-  String get authConfirmPasswordLabel;
-
   /// No description provided for @authSignInButton.
   ///
   /// In en, this message translates to:
@@ -8372,102 +6896,6 @@ abstract class AppLocalizations {
   /// **'Signing in'**
   String get authSigningIn;
 
-  /// No description provided for @authCreateAccount.
-  ///
-  /// In en, this message translates to:
-  /// **'Create Account'**
-  String get authCreateAccount;
-
-  /// No description provided for @authCreateAccountTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Create your account'**
-  String get authCreateAccountTitle;
-
-  /// No description provided for @authCreatingAccount.
-  ///
-  /// In en, this message translates to:
-  /// **'Creating account'**
-  String get authCreatingAccount;
-
-  /// No description provided for @authAlreadyHaveAccount.
-  ///
-  /// In en, this message translates to:
-  /// **'Already have an account? Sign in'**
-  String get authAlreadyHaveAccount;
-
-  /// No description provided for @authForgotPassword.
-  ///
-  /// In en, this message translates to:
-  /// **'Forgot password?'**
-  String get authForgotPassword;
-
-  /// No description provided for @authForgotPasswordTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset password'**
-  String get authForgotPasswordTitle;
-
-  /// No description provided for @authForgotPasswordDescription.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter your email and we will send a password reset link.'**
-  String get authForgotPasswordDescription;
-
-  /// No description provided for @authResetPasswordTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Set a new password'**
-  String get authResetPasswordTitle;
-
-  /// No description provided for @authResetPasswordDescription.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter your new password to finish password recovery.'**
-  String get authResetPasswordDescription;
-
-  /// No description provided for @authNewPasswordLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'New Password'**
-  String get authNewPasswordLabel;
-
-  /// No description provided for @authConfirmNewPasswordLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Confirm New Password'**
-  String get authConfirmNewPasswordLabel;
-
-  /// No description provided for @authUpdatePasswordButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Update Password'**
-  String get authUpdatePasswordButton;
-
-  /// No description provided for @authUpdatingPassword.
-  ///
-  /// In en, this message translates to:
-  /// **'Updating password'**
-  String get authUpdatingPassword;
-
-  /// No description provided for @authSendResetLink.
-  ///
-  /// In en, this message translates to:
-  /// **'Send Reset Link'**
-  String get authSendResetLink;
-
-  /// No description provided for @authSendingResetLink.
-  ///
-  /// In en, this message translates to:
-  /// **'Sending link'**
-  String get authSendingResetLink;
-
-  /// No description provided for @authBackToSignIn.
-  ///
-  /// In en, this message translates to:
-  /// **'Back to sign in'**
-  String get authBackToSignIn;
-
   /// No description provided for @authCheckEmailTitle.
   ///
   /// In en, this message translates to:
@@ -8479,12 +6907,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'We sent a 6-digit code to {email}.'**
   String authCheckEmailMessage(String email);
-
-  /// No description provided for @authResetEmailSent.
-  ///
-  /// In en, this message translates to:
-  /// **'If an account exists, a reset link has been sent.'**
-  String get authResetEmailSent;
 
   /// No description provided for @authEmailRequired.
   ///
@@ -8510,30 +6932,6 @@ abstract class AppLocalizations {
   /// **'Password must be at least 6 characters'**
   String get authPasswordTooShort;
 
-  /// No description provided for @authConfirmPasswordRequired.
-  ///
-  /// In en, this message translates to:
-  /// **'Confirm your password'**
-  String get authConfirmPasswordRequired;
-
-  /// No description provided for @authConfirmPasswordMismatch.
-  ///
-  /// In en, this message translates to:
-  /// **'Passwords do not match'**
-  String get authConfirmPasswordMismatch;
-
-  /// No description provided for @authShowPassword.
-  ///
-  /// In en, this message translates to:
-  /// **'Show password'**
-  String get authShowPassword;
-
-  /// No description provided for @authHidePassword.
-  ///
-  /// In en, this message translates to:
-  /// **'Hide password'**
-  String get authHidePassword;
-
   /// No description provided for @authUnavailable.
   ///
   /// In en, this message translates to:
@@ -8545,12 +6943,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong. Try again.'**
   String get authUnknownError;
-
-  /// No description provided for @authAgreeRequired.
-  ///
-  /// In en, this message translates to:
-  /// **'Please agree to the terms and privacy policy first.'**
-  String get authAgreeRequired;
 
   /// No description provided for @authTermsAgreementPrefix.
   ///
@@ -8738,12 +7130,6 @@ abstract class AppLocalizations {
   /// **'Import from File'**
   String get importAudioFromFile;
 
-  /// No description provided for @importAudioFromFileDescription.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose media files from your phone or cloud drive'**
-  String get importAudioFromFileDescription;
-
   /// No description provided for @importAudioFromUrl.
   ///
   /// In en, this message translates to:
@@ -8761,18 +7147,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Import from Cloud Storage'**
   String get importAudioFromCloudDrive;
-
-  /// No description provided for @importAudioFromBaiduNetdisk.
-  ///
-  /// In en, this message translates to:
-  /// **'Import from Baidu Netdisk'**
-  String get importAudioFromBaiduNetdisk;
-
-  /// No description provided for @cloudDriveSourceShort.
-  ///
-  /// In en, this message translates to:
-  /// **'Cloud Storage'**
-  String get cloudDriveSourceShort;
 
   /// No description provided for @baiduNetdisk.
   ///
@@ -8822,12 +7196,6 @@ abstract class AppLocalizations {
   /// **'Connect Baidu Netdisk'**
   String get baiduNetdiskConnectAction;
 
-  /// No description provided for @baiduNetdiskLogoutTooltip.
-  ///
-  /// In en, this message translates to:
-  /// **'Sign out of Baidu Netdisk'**
-  String get baiduNetdiskLogoutTooltip;
-
   /// No description provided for @baiduNetdiskSelectAllAction.
   ///
   /// In en, this message translates to:
@@ -8839,24 +7207,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Clear'**
   String get baiduNetdiskClearSelectionAction;
-
-  /// No description provided for @baiduNetdiskLogoutTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Sign out of Baidu Netdisk?'**
-  String get baiduNetdiskLogoutTitle;
-
-  /// No description provided for @baiduNetdiskLogoutMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Echo Loop will clear the saved Baidu Netdisk authorization on this device.'**
-  String get baiduNetdiskLogoutMessage;
-
-  /// No description provided for @baiduNetdiskLogoutConfirm.
-  ///
-  /// In en, this message translates to:
-  /// **'Sign Out'**
-  String get baiduNetdiskLogoutConfirm;
 
   /// No description provided for @baiduNetdiskAccountTooltip.
   ///
@@ -8888,12 +7238,6 @@ abstract class AppLocalizations {
   /// **'Membership'**
   String get baiduNetdiskMembership;
 
-  /// No description provided for @baiduNetdiskUserId.
-  ///
-  /// In en, this message translates to:
-  /// **'User ID'**
-  String get baiduNetdiskUserId;
-
   /// No description provided for @baiduNetdiskUnavailable.
   ///
   /// In en, this message translates to:
@@ -8905,12 +7249,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Disconnect Baidu Netdisk'**
   String get baiduNetdiskDisconnect;
-
-  /// No description provided for @baiduNetdiskNoSupportedAudio.
-  ///
-  /// In en, this message translates to:
-  /// **'No supported media files found in this folder.'**
-  String get baiduNetdiskNoSupportedAudio;
 
   /// No description provided for @importAudioShort.
   ///
@@ -8930,35 +7268,11 @@ abstract class AppLocalizations {
   /// **'Canceling Import…'**
   String get cancelingImport;
 
-  /// No description provided for @importAudioSelectedCount.
-  ///
-  /// In en, this message translates to:
-  /// **'Import {count}'**
-  String importAudioSelectedCount(int count);
-
   /// No description provided for @importAudioAndSubtitleCount.
   ///
   /// In en, this message translates to:
   /// **'Import ({audioCount, plural, =0{} =1{1 item} other{{audioCount} items}}{subtitleCount, plural, =0{} =1{, 1 subtitle} other{, {subtitleCount} subtitles}})'**
   String importAudioAndSubtitleCount(int audioCount, int subtitleCount);
-
-  /// No description provided for @baiduNetdiskImportingFile.
-  ///
-  /// In en, this message translates to:
-  /// **'Importing {name}...'**
-  String baiduNetdiskImportingFile(String name);
-
-  /// No description provided for @baiduNetdiskImportedCount.
-  ///
-  /// In en, this message translates to:
-  /// **'Imported {count} from Baidu Netdisk'**
-  String baiduNetdiskImportedCount(int count);
-
-  /// No description provided for @baiduNetdiskSkippedSummary.
-  ///
-  /// In en, this message translates to:
-  /// **'Skipped duplicates: {duplicates} · Failed: {failures}'**
-  String baiduNetdiskSkippedSummary(int duplicates, int failures);
 
   /// No description provided for @audioUrlLabel.
   ///
@@ -9104,18 +7418,6 @@ abstract class AppLocalizations {
   /// **'Add with Apple Podcasts or RSS'**
   String get subscribePodcastOptionDescription;
 
-  /// No description provided for @podcastUrlLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Apple Podcasts or RSS URL'**
-  String get podcastUrlLabel;
-
-  /// No description provided for @podcastUrlHint.
-  ///
-  /// In en, this message translates to:
-  /// **'https://podcasts.apple.com/... or https://…/feed.xml'**
-  String get podcastUrlHint;
-
   /// No description provided for @podcastSearchHint.
   ///
   /// In en, this message translates to:
@@ -9133,12 +7435,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search failed, please try again'**
   String get podcastSearchFailed;
-
-  /// No description provided for @podcastSubscribeThisLink.
-  ///
-  /// In en, this message translates to:
-  /// **'Subscribe to this link'**
-  String get podcastSubscribeThisLink;
 
   /// No description provided for @podcastSubscribing.
   ///
@@ -9164,12 +7460,6 @@ abstract class AppLocalizations {
   /// **'Already subscribed — see Collection \"{name}\"'**
   String podcastAlreadySubscribed(String name);
 
-  /// No description provided for @podcastRefreshFeed.
-  ///
-  /// In en, this message translates to:
-  /// **'Refresh Feed'**
-  String get podcastRefreshFeed;
-
   /// No description provided for @podcastUnsubscribe.
   ///
   /// In en, this message translates to:
@@ -9187,12 +7477,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'All episodes and downloaded audio files in this collection will be deleted.'**
   String get podcastUnsubscribeConfirmMessage;
-
-  /// No description provided for @podcastFeedInfo.
-  ///
-  /// In en, this message translates to:
-  /// **'Feed Info'**
-  String get podcastFeedInfo;
 
   /// No description provided for @podcastDetails.
   ///
@@ -9212,24 +7496,6 @@ abstract class AppLocalizations {
   /// **'More'**
   String get podcastShowMore;
 
-  /// No description provided for @podcastShowLess.
-  ///
-  /// In en, this message translates to:
-  /// **'Less'**
-  String get podcastShowLess;
-
-  /// No description provided for @podcastTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Title'**
-  String get podcastTitle;
-
-  /// No description provided for @podcastAuthor.
-  ///
-  /// In en, this message translates to:
-  /// **'Author'**
-  String get podcastAuthor;
-
   /// No description provided for @podcastFeedUrl.
   ///
   /// In en, this message translates to:
@@ -9248,23 +7514,11 @@ abstract class AppLocalizations {
   /// **'Link'**
   String get podcastOriginalLink;
 
-  /// No description provided for @podcastAudioType.
-  ///
-  /// In en, this message translates to:
-  /// **'Audio Type'**
-  String get podcastAudioType;
-
   /// No description provided for @podcastOpenLinkFailed.
   ///
   /// In en, this message translates to:
   /// **'Could not open link'**
   String get podcastOpenLinkFailed;
-
-  /// No description provided for @podcastLastRefreshed.
-  ///
-  /// In en, this message translates to:
-  /// **'Last refreshed: {time}'**
-  String podcastLastRefreshed(String time);
 
   /// No description provided for @podcastEpisodeGuid.
   ///
@@ -9319,12 +7573,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Echo Loop AI (Advanced)'**
   String get ttsEngineEchoLoop;
-
-  /// No description provided for @ttsEngineComingSoon.
-  ///
-  /// In en, this message translates to:
-  /// **'Coming soon'**
-  String get ttsEngineComingSoon;
 
   /// No description provided for @ttsEngineEchoLoopDescription.
   ///
@@ -9626,12 +7874,6 @@ abstract class AppLocalizations {
   /// **'AI Dictionary'**
   String get dictSourceAi;
 
-  /// No description provided for @dictSourceCambridge.
-  ///
-  /// In en, this message translates to:
-  /// **'Cambridge'**
-  String get dictSourceCambridge;
-
   /// No description provided for @dictSourceAlwaysOn.
   ///
   /// In en, this message translates to:
@@ -9656,18 +7898,6 @@ abstract class AppLocalizations {
   /// **'Switch dictionary, currently {name}'**
   String dictSwitcherSemantics(String name);
 
-  /// No description provided for @cambridgeNotFound.
-  ///
-  /// In en, this message translates to:
-  /// **'Not found in Cambridge'**
-  String get cambridgeNotFound;
-
-  /// No description provided for @dictTryOtherSource.
-  ///
-  /// In en, this message translates to:
-  /// **'Try another dictionary'**
-  String get dictTryOtherSource;
-
   /// No description provided for @dictCambridgeOpenInBrowser.
   ///
   /// In en, this message translates to:
@@ -9691,18 +7921,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The phrase is too long. Select up to 8 words.'**
   String get dictPhraseTooLong;
-
-  /// No description provided for @ttsPlayUk.
-  ///
-  /// In en, this message translates to:
-  /// **'Play UK pronunciation'**
-  String get ttsPlayUk;
-
-  /// No description provided for @ttsPlayUs.
-  ///
-  /// In en, this message translates to:
-  /// **'Play US pronunciation'**
-  String get ttsPlayUs;
 
   /// No description provided for @dictAiSynonyms.
   ///
@@ -9859,18 +8077,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Discussing: {summary}'**
   String chatContextLabel(String summary);
-
-  /// No description provided for @chatEmptyGreeting.
-  ///
-  /// In en, this message translates to:
-  /// **'Ask me anything about this sentence.'**
-  String get chatEmptyGreeting;
-
-  /// No description provided for @chatErrorNetwork.
-  ///
-  /// In en, this message translates to:
-  /// **'Network unavailable. Tap to retry.'**
-  String get chatErrorNetwork;
 
   /// No description provided for @chatErrorGenerate.
   ///
@@ -10148,18 +8354,6 @@ abstract class AppLocalizations {
   /// **'Show video subtitles'**
   String get mediaShowVideoSubtitles;
 
-  /// No description provided for @videoLoopWhole.
-  ///
-  /// In en, this message translates to:
-  /// **'Loop all'**
-  String get videoLoopWhole;
-
-  /// No description provided for @videoLoopSentence.
-  ///
-  /// In en, this message translates to:
-  /// **'Sentence loop'**
-  String get videoLoopSentence;
-
   /// No description provided for @videoLoading.
   ///
   /// In en, this message translates to:
@@ -10172,12 +8366,6 @@ abstract class AppLocalizations {
   /// **'Failed to load video'**
   String get videoLoadFailed;
 
-  /// No description provided for @videoNoTranscript.
-  ///
-  /// In en, this message translates to:
-  /// **'No transcript'**
-  String get videoNoTranscript;
-
   /// No description provided for @videoRetry.
   ///
   /// In en, this message translates to:
@@ -10189,12 +8377,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Play pronunciation'**
   String get pronunciationPlay;
-
-  /// No description provided for @redownload.
-  ///
-  /// In en, this message translates to:
-  /// **'Download again'**
-  String get redownload;
 
   /// No description provided for @collapseSidebar.
   ///
@@ -10279,12 +8461,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign-in'**
   String get signInSection;
-
-  /// No description provided for @profileAvatar.
-  ///
-  /// In en, this message translates to:
-  /// **'Avatar'**
-  String get profileAvatar;
 
   /// No description provided for @profileChangeAvatar.
   ///
