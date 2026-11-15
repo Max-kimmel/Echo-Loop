@@ -170,7 +170,7 @@ void main() {
 
       _CountingEngine? counting;
       final coordinator = TtsCoordinator(
-        factory: (kind) {
+        factory: (kind, _) {
           // 本测试只用 kokoro。
           final inner = KokoroTtsEngine(
             resolvePaths: manager.kokoroConfigPaths,
