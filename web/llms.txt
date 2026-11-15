@@ -21,7 +21,7 @@ Echo Loop removes daily decision fatigue by turning any real audio or video mate
 
 ## Official Links
 
-- [Official Website](https://www.echo-loop.top/): Product overview, guides, and downloads
+- [Official Website](https://echo-loop.fun/): Web training studio and product portal
 - [GitHub Repository](https://github.com/echo-loop/Echo-Loop): Open-source Flutter codebase (AGPL-3.0)
 - [AtomGit Mirror (China)](https://atomgit.com/echo-loop/Echo-Loop): Domestic mirror repository
 - [App Store (iOS)](https://apps.apple.com/app/id6760324074): Official iOS and Apple Silicon Mac release

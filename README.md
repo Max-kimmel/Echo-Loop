@@ -405,7 +405,7 @@ flutter run -d <ios|android|macos> --dart-define-from-file=.dev.env
 > `--dart-define-from-file` 注入。这两个文件已被 `.gitignore`，请勿提交。
 > 全球 API 默认地址与中国 API 地址可用编译期变量覆盖；全球和中国静态资源 CDN 地址配置在
 > `lib/config/regional_service_endpoints.dart`；
-> 全球 API 默认地址为 `https://www.echo-loop.top`，可通过 `API_BASE_URL` 编译期变量覆盖；
+> 线上体验官网：<https://echo-loop.fun/>；全球 API 默认地址为 `https://www.echo-loop.top`，可通过 `API_BASE_URL` 编译期变量覆盖；
 > 中国 API 默认地址为 `https://www.echo-loop.cn`，可通过 `API_CHINA_BASE_URL` 编译期变量覆盖，
 > 本地构建可在 `.prod.env` 中覆盖；GitHub Actions CI/Release 会直接将对应 GitHub Variables 传给构建命令；
 > release 包通过统一的 `isChinaUser` 结论选择区域：中国 Apple Storefront、设备国家码或
