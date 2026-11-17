@@ -77,27 +77,38 @@ class _WebDictionaryViewState extends State<WebDictionaryView> {
         const text = typeof body.innerText === 'string'
           ? body.innerText.trim()
           : '';
+        if (text.length > 0) {
+          foundVisibleContent = true;
+          break;
+        }
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        // 先检测视口内几何边界，再按需读取 getComputedStyle，避免每帧全量布局/样式抖动。
         const hasVisibleMedia = Array.from(
           body.querySelectorAll('img, svg, canvas, video, iframe')
         ).some((element) => {
-          const style = window.getComputedStyle(element);
           const rect = element.getBoundingClientRect();
+          if (
+            rect.width <= 0 ||
+            rect.height <= 0 ||
+            rect.right <= 0 ||
+            rect.bottom <= 0 ||
+            rect.left >= viewportWidth ||
+            rect.top >= viewportHeight
+          ) {
+            return false;
+          }
+          const style = window.getComputedStyle(element);
           return style.display !== 'none' &&
             style.visibility !== 'hidden' &&
-            Number(style.opacity) > 0 &&
-            rect.width > 0 &&
-            rect.height > 0 &&
-            rect.right > 0 &&
-            rect.bottom > 0 &&
-            rect.left < window.innerWidth &&
-            rect.top < window.innerHeight;
+            Number(style.opacity) > 0;
         });
-        if (text.length > 0 || hasVisibleMedia) {
+        if (hasVisibleMedia) {
           foundVisibleContent = true;
           break;
         }
       }
-      await new Promise((resolve) => window.requestAnimationFrame(resolve));
+      await new Promise((resolve) => window.setTimeout(resolve, 60));
     }
 
     if (!foundVisibleContent) return false;
@@ -123,7 +134,7 @@ class _WebDictionaryViewState extends State<WebDictionaryView> {
       if (document.getElementById(styleId)) return;
       const style = document.createElement('style');
       style.id = styleId;
-      style.textContent = ${jsonEncode('$_defaultTidyCss$adHidingCss\n*::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }')};
+      style.textContent = ${jsonEncode('$_defaultTidyCss$adHidingCss\n* { scrollbar-width: none !important; }\n@supports not (scrollbar-width: none) { *::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; } }')};
       (document.head || document.documentElement)?.appendChild(style);
     })();
   ''';
